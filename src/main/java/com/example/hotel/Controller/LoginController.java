@@ -39,9 +39,8 @@ public class LoginController {
             //保存微信来的数据
             User user=JSON.parseObject(loginDTO.getRawData(),User.class);
             user.setUid(sessionDTO.getOpenid());
-            userService.insert(user);
+            userService.saveOrUpdate(user);
             //生成token，用于自定义登录态，这里的存储逻辑比较复杂，放到下一讲
-
             return ResultDTO.ok("ok");
         }catch (ErrorCodeException e) {
             return ResultDTO.fail(e);
@@ -51,8 +50,5 @@ public class LoginController {
     }
 
 
-    @RequestMapping("das")
-    public String aa(){
-        return "sad";
-    }
+
 }

@@ -18,6 +18,12 @@ public class ResultDTO {
         resultDTO.setStatus(200);
         resultDTO.setData(data);
         resultDTO.setMessage("请求成功");
+        try{
+            return resultDTO;
+        }catch (Exception e){
+
+        }
+        System.out.println();
         return resultDTO;
     }
 
@@ -35,27 +41,5 @@ public class ResultDTO {
         return resultDTO;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

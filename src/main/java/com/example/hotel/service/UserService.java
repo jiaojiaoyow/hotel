@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
  */
 
 public interface UserService {
-    int insert(User record);
-
-    int insertSelective(User record);
+    public void saveOrUpdate(User user);
+    public User getByToken(String token);
 
 }

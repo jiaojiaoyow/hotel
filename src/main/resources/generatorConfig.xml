@@ -18,6 +18,8 @@
                         connectionURL="jdbc:mysql://localhost:3306/newhoteldb?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true"
                         userId="root"
                         password="root">
+            <!--不生成withblog文件-->
+            <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
         <javaTypeResolver>
