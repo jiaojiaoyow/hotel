@@ -27,4 +27,9 @@ public class ErrorCodeException extends RuntimeException implements IErrorCode {
                 ", message='" + message + '\'' +
                 '}';
     }
+
+    @Override
+    public Integer getCode() {
+        return null;
+    }
 }

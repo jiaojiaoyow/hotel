@@ -4,9 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
 @SpringBootApplication
-@ComponentScan("com.example.hotel.service")
+@ComponentScan(basePackages = {"com.example.hotel.adapter","com.example.hotel.Controller","com.example.hotel.service"})
 @ImportResource({"classpath*:applicationContext.xml"})
 public class HotelApplication {
 
@@ -14,4 +17,8 @@ public class HotelApplication {
         SpringApplication.run(HotelApplication.class, args);
     }
 
+    @RequestMapping("/")
+    String index() {
+        return "index";
+    }
 }

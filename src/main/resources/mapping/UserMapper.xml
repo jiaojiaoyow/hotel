@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel.model.User">
+        <id column="uid" jdbcType="CHAR" property="uid" />
+        <result column="uname" jdbcType="VARCHAR" property="uname" />
+        <result column="ubalance" jdbcType="DOUBLE" property="ubalance" />
+        <result column="ugrade" jdbcType="INTEGER" property="ugrade" />
+        <result column="token" jdbcType="CHAR" property="token" />
+        <result column="nickName" jdbcType="VARCHAR" property="nickname" />
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    uid, uname, ubalance, ugrade, token, nickName, avatarUrl, gender, gmt_create, gmt_modified,
+    status
+  </sql>
+    <insert id="insert" parameterType="com.example.hotel.model.User">
+    insert into user (uid, uname, ubalance,
+      ugrade, token, nickName,
+      avatarUrl, gender, gmt_create,
+      gmt_modified, status)
+    values (#{uid,jdbcType=CHAR}, #{uname,jdbcType=VARCHAR}, #{ubalance,jdbcType=DOUBLE},
+      #{ugrade,jdbcType=INTEGER}, #{token,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR},
+      #{avatarurl,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, #{gmtCreate,jdbcType=BIGINT},
+      #{gmtModified,jdbcType=BIGINT}, #{status,jdbcType=TINYINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel.model.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="uname != null">
+                uname,
+            </if>
+            <if test="ubalance != null">
+                ubalance,
+            </if>
+            <if test="ugrade != null">
+                ugrade,
+            </if>
+            <if test="token != null">
+                token,
+            </if>
+            <if test="nickname != null">
+                nickName,
+            </if>
+            <if test="avatarurl != null">
+                avatarUrl,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                #{uid,jdbcType=CHAR},
+            </if>
+            <if test="uname != null">
+                #{uname,jdbcType=VARCHAR},
+            </if>
+            <if test="ubalance != null">
+                #{ubalance,jdbcType=DOUBLE},
+            </if>
+            <if test="ugrade != null">
+                #{ugrade,jdbcType=INTEGER},
+            </if>
+            <if test="token != null">
+                #{token,jdbcType=CHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarurl != null">
+                #{avatarurl,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=BIGINT},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+</mapper>

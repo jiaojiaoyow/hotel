@@ -35,16 +35,16 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        // 通过 token 从数据库中获取信息，如果没有验证失败
-        // 如果通过一台设备登录，再通过另一台设备登录，第一台设备会自动登出
-        User user = userService.getByToken(token);
-        if (user == null) {
-            makeFail(response);
-            return false;
-        }
+//        // 通过 token 从数据库中获取信息，如果没有验证失败
+//        // 如果通过一台设备登录，再通过另一台设备登录，第一台设备会自动登出
+//        User user = userService.getByToken(token);
+//        if (user == null) {
+//            makeFail(response);
+//            return false;
+//        }
 
-        //把获取到的user信息暂存到 ThreadLocal 里面，以便上线文中方便的使用
-        SessionUtil.setUser(user);
+//        //把获取到的user信息暂存到 ThreadLocal 里面，以便上线文中方便的使用
+//        SessionUtil.setUser(user);
         return true;
     }
 
@@ -57,7 +57,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             out.print(JSON.toJSONString(resultDTO));
             out.close();
         } catch (Exception e) {
-            log.error("LoginInterceptor preHandle", e);
+            System.out.println(e);
         }
     }
 
