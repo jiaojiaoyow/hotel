@@ -3,6 +3,7 @@ package com.example.hotel.Controller;
 import com.example.hotel.DTO.LoginDTO;
 import com.example.hotel.DTO.ResultDTO;
 import com.example.hotel.DTO.SessionDTO;
+import com.example.hotel.DTO.UserDTO;
 import com.example.hotel.adapter.WechatAdapter;
 import com.example.hotel.error.CommonErrorCode;
 import com.example.hotel.error.ErrorCodeException;
@@ -38,10 +39,13 @@ public class LoginController {
 
             //保存微信来的数据
             User user=JSON.parseObject(loginDTO.getRawData(),User.class);
+            UserDTO user1=JSON.parseObject(loginDTO.getRawData(),UserDTO.class);
             user.setUid(sessionDTO.getOpenid());
             userService.saveOrUpdate(user);
             //生成token，用于自定义登录态，这里的存储逻辑比较复杂，放到下一讲
-            return ResultDTO.ok("ok");
+
+
+            return ResultDTO.ok(user1);
         }catch (ErrorCodeException e) {
             return ResultDTO.fail(e);
         } catch (Exception e) {
