@@ -30,6 +30,7 @@
 	foreign key (uid) references user (uid)
 );
 
+<<<<<<< HEAD
 create table assey( #文章
   aid int primary key ,
   uid char(55),
@@ -37,4 +38,11 @@ create table assey( #文章
   content text, #内容
   create_time date ,#生成时间
   imageUrl varchar(150)  #图片url
+=======
+create table essay(		#文章
+	uid char(55),
+	aname varchar(50),
+	
+
+>>>>>>> master
 )

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.dao.EssayMapper">
+  <resultMap id="BaseResultMap" type="com.example.hotel.model.Essay">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="uid" jdbcType="CHAR" property="uid" />
+    <result column="tiile" jdbcType="VARCHAR" property="tiile" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="imageUrl" jdbcType="VARCHAR" property="imageurl" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.hotel.model.Essay">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aid, uid, tiile, create_time, imageUrl
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.hotel.model.EssayExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from essay
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.hotel.model.EssayExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from essay
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from essay
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from essay
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.hotel.model.EssayExample">
+    delete from essay
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.hotel.model.Essay">
+    insert into essay (aid, uid, tiile, 
+      create_time, imageUrl, content
+      )
+    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{tiile,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{imageurl,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.hotel.model.Essay">
+    insert into essay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="tiile != null">
+        tiile,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="imageurl != null">
+        imageUrl,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=CHAR},
+      </if>
+      <if test="tiile != null">
+        #{tiile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="imageurl != null">
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.hotel.model.EssayExample" resultType="java.lang.Long">
+    select count(*) from essay
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update essay
+    <set>
+      <if test="record.aid != null">
+        aid = #{record.aid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=CHAR},
+      </if>
+      <if test="record.tiile != null">
+        tiile = #{record.tiile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.imageurl != null">
+        imageUrl = #{record.imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update essay
+    set aid = #{record.aid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=CHAR},
+      tiile = #{record.tiile,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=DATE},
+      imageUrl = #{record.imageurl,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update essay
+    set aid = #{record.aid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=CHAR},
+      tiile = #{record.tiile,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=DATE},
+      imageUrl = #{record.imageurl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.Essay">
+    update essay
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=CHAR},
+      </if>
+      <if test="tiile != null">
+        tiile = #{tiile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="imageurl != null">
+        imageUrl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.hotel.model.Essay">
+    update essay
+    set uid = #{uid,jdbcType=CHAR},
+      tiile = #{tiile,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      imageUrl = #{imageurl,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.Essay">
+    update essay
+    set uid = #{uid,jdbcType=CHAR},
+      tiile = #{tiile,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      imageUrl = #{imageurl,jdbcType=VARCHAR}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithBLOBsWithRowbounds" parameterType="com.example.hotel.model.EssayExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from essay
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.EssayExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from essay
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!--自己加的-->
+  <select id="selectAll"
+          resultType="com.example.hotel.model.Essay">
+       select * from essay
+  </select>
+</mapper>
