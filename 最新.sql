@@ -29,6 +29,11 @@
 	orderday     int(4), 		#入住天数
 	primary key(orderid,uid),
 	foreign key (uid) references user (uid)
-
-
 );
+
+create table essay(		#文章
+	uid char(55),
+	aname varchar(50),
+	
+
+)
