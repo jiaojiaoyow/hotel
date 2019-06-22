@@ -30,7 +30,6 @@ public class LoginController {
     @RequestMapping("/api/login")
     public ResultDTO login(@RequestBody LoginDTO loginDTO){
         try{
-
             //使用code调用微信api来获取openid和
             SessionDTO sessionDTO=wechatAdapter.jscode2session(loginDTO.getCode());
             //检验传递过来的用户信息是否合法
