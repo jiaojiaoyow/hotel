@@ -42,7 +42,29 @@ create table assey( #文章
 create table essay(		#文章
 	uid char(55),
 	aname varchar(50),
-	
+
 
 >>>>>>> master
 )
+
+CREATE TABLE Coupon ( #优惠卷
+  `cid` int primary key ,
+  `cname` varchar(60) NOT NULL ,
+  `min_amount` double ,#满减到达金额
+  `amount` double ,#抵扣金额
+  #优惠卷的有效期的开始和结束日期
+  `send_start_date` int(11) NOT NULL default '0',
+  `send_end_date` int(11) NOT NULL default '0',
+)
+
+create table getCoupon(  #领卷
+  uid char(55),
+  cid int,  #优惠卷id
+  status tinyint(4) DEFAULT 0 ,#零代表卷还未使用
+	#用户使用有效期
+  `use_start_date` int(11) NOT NULL default '0',
+  `use_end_date` int(11) NOT NULL default '0',
+	PRIMARY KEY(uid,cid)
+)
+
+
