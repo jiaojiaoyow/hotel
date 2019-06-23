@@ -7,11 +7,36 @@ import lombok.Data;
  * Created by codedrinker on 2018/11/25.
  * 返回登陆成功或者失败等信息
  */
-@Data
+
+
 public class ResultDTO {
     private Integer status;
     private Object data;
     private String message;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public static ResultDTO ok(Object data) {
         ResultDTO resultDTO = new ResultDTO();
