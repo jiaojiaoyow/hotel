@@ -3,7 +3,7 @@
 <mapper namespace="com.example.hotel.dao.RoomOrderMapper">
   <resultMap id="BaseResultMap" type="com.example.hotel.model.RoomOrder">
     <id column="orderid" jdbcType="INTEGER" property="orderid" />
-    <id column="uid" jdbcType="VARCHAR" property="uid" />
+    <id column="uid" jdbcType="CHAR" property="uid" />
     <id column="roomname" jdbcType="VARCHAR" property="roomname" />
     <result column="uname" jdbcType="VARCHAR" property="uname" />
     <result column="uphone" jdbcType="VARCHAR" property="uphone" />
@@ -13,6 +13,8 @@
     <result column="orderday" jdbcType="INTEGER" property="orderday" />
     <result column="totalprice" jdbcType="DOUBLE" property="totalprice" />
     <result column="orderstatus" jdbcType="INTEGER" property="orderstatus" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="arrivetime" jdbcType="VARCHAR" property="arrivetime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,22 +76,8 @@
   </sql>
   <sql id="Base_Column_List">
     orderid, uid, roomname, uname, uphone, roomnumber, ordertime, leavetime, orderday, 
-    totalprice, orderstatus
+    totalprice, orderstatus, cid, arrivetime
   </sql>
-  <select id="selectByExample" parameterType="com.example.hotel.model.RoomOrderExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from roomorder
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
 
   <!-- 查询该所有订单-->
   <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -97,7 +85,7 @@
     <include refid="Base_Column_List" />
     from roomorder
     where uid = #{uid,jdbcType=VARCHAR}
-      and orderstatus = 2
+    and orderstatus = 2
 
   </select>
 
@@ -114,18 +102,33 @@
 
 
 
+
+  <select id="selectByExample" parameterType="com.example.hotel.model.RoomOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from roomorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="com.example.hotel.model.RoomOrderKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from roomorder
     where orderid = #{orderid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=VARCHAR}
+      and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.example.hotel.model.RoomOrderKey">
     delete from roomorder
     where orderid = #{orderid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=VARCHAR}
+      and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.hotel.model.RoomOrderExample">
@@ -138,11 +141,13 @@
     insert into roomorder (orderid, uid, roomname, 
       uname, uphone, roomnumber, 
       ordertime, leavetime, orderday, 
-      totalprice, orderstatus)
-    values (#{orderid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{roomname,jdbcType=VARCHAR}, 
+      totalprice, orderstatus, cid, 
+      arrivetime)
+    values (#{orderid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{roomname,jdbcType=VARCHAR}, 
       #{uname,jdbcType=VARCHAR}, #{uphone,jdbcType=VARCHAR}, #{roomnumber,jdbcType=INTEGER}, 
       #{ordertime,jdbcType=TIMESTAMP}, #{leavetime,jdbcType=TIMESTAMP}, #{orderday,jdbcType=INTEGER}, 
-      #{totalprice,jdbcType=DOUBLE}, #{orderstatus,jdbcType=INTEGER})
+      #{totalprice,jdbcType=DOUBLE}, #{orderstatus,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{arrivetime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.hotel.model.RoomOrder">
     insert into roomorder
@@ -180,13 +185,19 @@
       <if test="orderstatus != null">
         orderstatus,
       </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="arrivetime != null">
+        arrivetime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
         #{orderid,jdbcType=INTEGER},
       </if>
       <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
+        #{uid,jdbcType=CHAR},
       </if>
       <if test="roomname != null">
         #{roomname,jdbcType=VARCHAR},
@@ -215,6 +226,12 @@
       <if test="orderstatus != null">
         #{orderstatus,jdbcType=INTEGER},
       </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="arrivetime != null">
+        #{arrivetime,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.example.hotel.model.RoomOrderExample" resultType="java.lang.Long">
@@ -230,7 +247,7 @@
         orderid = #{record.orderid,jdbcType=INTEGER},
       </if>
       <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=VARCHAR},
+        uid = #{record.uid,jdbcType=CHAR},
       </if>
       <if test="record.roomname != null">
         roomname = #{record.roomname,jdbcType=VARCHAR},
@@ -259,6 +276,12 @@
       <if test="record.orderstatus != null">
         orderstatus = #{record.orderstatus,jdbcType=INTEGER},
       </if>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.arrivetime != null">
+        arrivetime = #{record.arrivetime,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -267,7 +290,7 @@
   <update id="updateByExample" parameterType="map">
     update roomorder
     set orderid = #{record.orderid,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=CHAR},
       roomname = #{record.roomname,jdbcType=VARCHAR},
       uname = #{record.uname,jdbcType=VARCHAR},
       uphone = #{record.uphone,jdbcType=VARCHAR},
@@ -276,7 +299,9 @@
       leavetime = #{record.leavetime,jdbcType=TIMESTAMP},
       orderday = #{record.orderday,jdbcType=INTEGER},
       totalprice = #{record.totalprice,jdbcType=DOUBLE},
-      orderstatus = #{record.orderstatus,jdbcType=INTEGER}
+      orderstatus = #{record.orderstatus,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      arrivetime = #{record.arrivetime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -308,9 +333,15 @@
       <if test="orderstatus != null">
         orderstatus = #{orderstatus,jdbcType=INTEGER},
       </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="arrivetime != null">
+        arrivetime = #{arrivetime,jdbcType=VARCHAR},
+      </if>
     </set>
     where orderid = #{orderid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=VARCHAR}
+      and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.RoomOrder">
@@ -322,9 +353,11 @@
       leavetime = #{leavetime,jdbcType=TIMESTAMP},
       orderday = #{orderday,jdbcType=INTEGER},
       totalprice = #{totalprice,jdbcType=DOUBLE},
-      orderstatus = #{orderstatus,jdbcType=INTEGER}
+      orderstatus = #{orderstatus,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      arrivetime = #{arrivetime,jdbcType=VARCHAR}
     where orderid = #{orderid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=VARCHAR}
+      and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.RoomOrderExample" resultMap="BaseResultMap">

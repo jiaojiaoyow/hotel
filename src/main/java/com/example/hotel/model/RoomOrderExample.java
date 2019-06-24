@@ -804,6 +804,136 @@ public class RoomOrderExample {
             addCriterion("orderstatus not between", value1, value2, "orderstatus");
             return (Criteria) this;
         }
+
+        public Criteria andCidIsNull() {
+            addCriterion("cid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidIsNotNull() {
+            addCriterion("cid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidEqualTo(Integer value) {
+            addCriterion("cid =", value, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidNotEqualTo(Integer value) {
+            addCriterion("cid <>", value, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidGreaterThan(Integer value) {
+            addCriterion("cid >", value, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cid >=", value, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidLessThan(Integer value) {
+            addCriterion("cid <", value, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidLessThanOrEqualTo(Integer value) {
+            addCriterion("cid <=", value, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidIn(List<Integer> values) {
+            addCriterion("cid in", values, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidNotIn(List<Integer> values) {
+            addCriterion("cid not in", values, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidBetween(Integer value1, Integer value2) {
+            addCriterion("cid between", value1, value2, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCidNotBetween(Integer value1, Integer value2) {
+            addCriterion("cid not between", value1, value2, "cid");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeIsNull() {
+            addCriterion("arrivetime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeIsNotNull() {
+            addCriterion("arrivetime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeEqualTo(String value) {
+            addCriterion("arrivetime =", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeNotEqualTo(String value) {
+            addCriterion("arrivetime <>", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeGreaterThan(String value) {
+            addCriterion("arrivetime >", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeGreaterThanOrEqualTo(String value) {
+            addCriterion("arrivetime >=", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeLessThan(String value) {
+            addCriterion("arrivetime <", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeLessThanOrEqualTo(String value) {
+            addCriterion("arrivetime <=", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeLike(String value) {
+            addCriterion("arrivetime like", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeNotLike(String value) {
+            addCriterion("arrivetime not like", value, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeIn(List<String> values) {
+            addCriterion("arrivetime in", values, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeNotIn(List<String> values) {
+            addCriterion("arrivetime not in", values, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeBetween(String value1, String value2) {
+            addCriterion("arrivetime between", value1, value2, "arrivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivetimeNotBetween(String value1, String value2) {
+            addCriterion("arrivetime not between", value1, value2, "arrivetime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

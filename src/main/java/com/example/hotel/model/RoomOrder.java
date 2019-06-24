@@ -19,6 +19,9 @@ public class RoomOrder extends RoomOrderKey {
 
     private Integer orderstatus;
 
+    private Integer cid;
+
+    private String arrivetime;
 
     public String getUname() {
         return uname;
@@ -82,5 +85,21 @@ public class RoomOrder extends RoomOrderKey {
 
     public void setOrderstatus(Integer orderstatus) {
         this.orderstatus = orderstatus;
+    }
+
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
+    public String getArrivetime() {
+        return arrivetime;
+    }
+
+    public void setArrivetime(String arrivetime) {
+        this.arrivetime = arrivetime == null ? null : arrivetime.trim();
     }
 }

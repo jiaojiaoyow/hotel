@@ -7,14 +7,6 @@ public class RoomOrderKey {
 
     private String roomname;
 
-    public RoomOrderKey(){}
-
-    public RoomOrderKey(Integer orderid,String uid,String roomname){
-        this.orderid=orderid;
-        this.uid=uid;
-        this.roomname=roomname;
-    }
-
     public Integer getOrderid() {
         return orderid;
     }

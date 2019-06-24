@@ -4,16 +4,13 @@ public class cOrderDTO {
 
     private String uid;  //用户id
     private int orderid; //订单id
-    private String  rname; //房间名字
-    private int number; //订房数量
     private int status; //状态 1
 
     public  cOrderDTO(){}
 
-    public cOrderDTO(String uid,int orderid,String rname,int number,int status){
-        this.number=number;
+    public cOrderDTO(String uid,int orderid,int status){
+
         this.orderid=orderid;
-        this.rname=rname;
         this.uid=uid;
         this.status=status;
 
@@ -43,20 +40,5 @@ public class cOrderDTO {
         this.orderid = orderid;
     }
 
-    public String getRname() {
-        return rname;
-    }
-
-    public void setRname(String rame) {
-        this.rname = rame;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
 }
 
