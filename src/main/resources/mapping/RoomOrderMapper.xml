@@ -79,7 +79,7 @@
     totalprice, orderstatus, cid, arrivetime
   </sql>
 
-  <!-- 查询该所有订单-->
+  <!-- 通过uid查询所有订单-->
   <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -89,6 +89,17 @@
 
   </select>
 
+  <!--通过订单id查询当前订单-->
+  <select id="selectByOrderid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from roomorder
+    where orderid = #{orderid,jdbcType=INTEGER}
+
+  </select>
+
+
+  <!--通过用户id，订单起始时间，房间名确认id-->
   <select id="selectByRDU" parameterType="com.example.hotel.model.RoomOrder" resultType="java.lang.Integer">
     select
      orderid

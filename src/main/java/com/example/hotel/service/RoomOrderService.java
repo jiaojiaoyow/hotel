@@ -38,4 +38,5 @@ public interface RoomOrderService {
 
     int selectByRDU(RoomOrder record);
 
+    RoomOrder selectByOrderid(int orderid);
 }

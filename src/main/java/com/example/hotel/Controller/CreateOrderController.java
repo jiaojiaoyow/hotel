@@ -11,7 +11,6 @@ import com.example.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
@@ -29,63 +28,7 @@ public class CreateOrderController {
     @Autowired
     private CouponService couponService;
 
-
-
-/*
-    @RequestMapping("/api/createorder")
-    public cOrderDTO createOrder(){  //创建订单
-
-        //HttpServletRequest request
-            String uid = "1234";
-            String roomname = "阳光大床房";
-            String ordertime = "2019-06-20";
-            String leavetime = "2019-06-21";
-            int days = 2;
-            int roomnumber = 18;
-            String username = "许文强";
-            String uphone = "18316102612";
-            Room r = roomService.selectByPrimaryKey(roomname);//查询roomname的房间信息
-            if (r != null) {
-                int num = r.getRoomnumber(); //剩余房间数
-                if (num > 0 && num - roomnumber >= 0) {
-
-                    double price = r.getRoomprice() * roomnumber * days; //总价，不算优惠卷
-                    String s = DateToString();
-                    ordertime += s.substring(10);
-                    leavetime += s.substring(10);
-                    RoomOrder order = new RoomOrder();
-                    order.setUid(uid);
-                    order.setRoomnumber(roomnumber);
-                    order.setUname(username);
-                    order.setUphone(uphone);
-                    order.setRoomname(roomname);
-                    order.setTotalprice(price);
-                    order.setOrdertime(ordertime);
-                    order.setLeavetime(leavetime);
-                    roomOrderService.insertSelective(order); //创建订单
-                    Room re = new Room();
-                    re.setRoomnumber(num - roomnumber);
-                    re.setRoomname(roomname);
-                    roomService.updateByPrimaryKeySelective(re);//更新房间数
-
-                    RoomOrder rm=new RoomOrder();
-                    rm.setOrdertime(ordertime);
-                    rm.setRoomname(roomname);
-                    rm.setUid(uid);
-                    int orderid = roomOrderService.selectByRDU(rm);//订单id
-                    cOrderDTO cd=new cOrderDTO(uid,orderid,roomname,roomnumber,1);
-                    System.out.println("创建订单成功");
-                    return cd;
-                } else {
-                    System.out.println("房间不足");
-                    return null;
-                }
-            }
-        System.out.println("数据为空");
-        return null;
-    }*/
-
-        //检查优惠卷
+    //检查优惠卷
     public  Double getCoupon(int cid){
         if(cid != 0  ) {
             Coupon coupon = couponService.selectByPrimaryKey(cid);
@@ -98,12 +41,12 @@ public class CreateOrderController {
         return 0.0;
     }
 
-
+    //创建订单
     @RequestMapping("/api/createorder")
-    public cOrderDTO createOrder(@RequestBody RoomOrder roomOrder){  //创建订单
+    public cOrderDTO createOrder(@RequestBody RoomOrder roomOrder){
 
+        try{
         //HttpServletRequest request
-
         if(roomOrder !=null) {
 
             String uid = roomOrder.getUid();                 //"1234";
@@ -114,13 +57,13 @@ public class CreateOrderController {
             int roomnumber = roomOrder.getRoomnumber();     //2;
             String username = roomOrder.getUname();         //"许文强";
             String uphone = roomOrder.getUphone();          //"18316102612";
-            String arrivetime=roomOrder.getArrivetime();    //到达时间
+            String arrivetime = roomOrder.getArrivetime();    //到达时间
             Room r = roomService.selectByPrimaryKey(roomname);//查询roomname的房间信息
             if (r != null) {
                 int num = r.getRoomnumber(); //剩余房间数
                 if (num > 0 && num - roomnumber >= 0) {
-                    double amount=getCoupon(roomOrder.getCid());
-                    double price = r.getRoomprice() * roomnumber * days-amount; //总价，算优惠卷
+                    double amount = getCoupon(roomOrder.getCid());
+                    double price = r.getRoomprice() * roomnumber * days - amount; //总价，算优惠卷
                     String s = DateToString();
                     ordertime += s.substring(10);
                     leavetime += s.substring(10);
@@ -134,20 +77,21 @@ public class CreateOrderController {
                     order.setOrdertime(ordertime);
                     order.setLeavetime(leavetime);
                     order.setArrivetime(arrivetime);
-                    roomOrderService.insertSelective(order); //创建订单
-                    Room re = new Room();
-                    re.setRoomnumber(num - roomnumber);
-                    re.setRoomname(roomname);
-                    roomService.updateByPrimaryKeySelective(re);//更新房间数
 
-                    RoomOrder rm=new RoomOrder();
+                    int a = roomService.updateByPrimaryKeyForReduce(roomname, roomnumber);//更新房间数
+                    if (a != 1) {
+                        System.out.println("所选房间剩余不足");
+                        return null;
+                    }
+                    roomOrderService.insertSelective(order); //创建订单
+                    RoomOrder rm = new RoomOrder();
                     rm.setOrdertime(ordertime);
                     rm.setRoomname(roomname);
                     rm.setUid(uid);
                     int orderid = roomOrderService.selectByRDU(rm);//订单id
 
 
-                    cOrderDTO cd=new cOrderDTO(uid,orderid,1);
+                    cOrderDTO cd = new cOrderDTO(uid, orderid, 1, 0.0);
 
                     return cd;
                 } else {
@@ -156,6 +100,9 @@ public class CreateOrderController {
                 }
 
             }
+        }
+        }catch(Exception e){
+            System.out.println(e);
 
         }
         System.out.println("数据为空");
@@ -163,40 +110,40 @@ public class CreateOrderController {
     }
 
 
+    //判断支付是否成功
     @RequestMapping("/api/judgeorder")
-    @ResponseBody
-    public void JudgeOrder(cOrderDTO Dt){
-        String uid="1234";
+    public String JudgeOrder(@RequestBody cOrderDTO Dt){
 
         if(Dt !=null){
+            RoomOrder re=roomOrderService.selectByOrderid(Dt.getOrderid());
 
-            RoomOrder roomOrder=new RoomOrder();
-            roomOrder.setUid(Dt.getUid());
-          //  roomOrder.setRoomname(Dt.getRname());
-            roomOrder.setOrderid(Dt.getOrderid());
-                if(Dt.getStatus()==2){  //支付成功
+            if( Dt.getUid().equals(re.getUid()) &&  re.getOrderstatus()==1 ) { //uid相同且订单状态为1
+                RoomOrder roomOrder=new RoomOrder();
+                roomOrder.setUid(Dt.getUid());
+                roomOrder.setOrderid(re.getOrderid());
+                roomOrder.setRoomname(re.getRoomname());
+                if (Dt.getStatus() == 2) {  //支付成功
+
+                    if (Dt.getBalance() != 0.0) {//余额
+
+
+                    }
+                    //设定优惠卷生效
                     roomOrder.setOrderstatus(2);
                     roomOrderService.updateByPrimaryKeySelective(roomOrder);//更改订单为2 成功
+                    return "订单成功。";
 
-            }else{
-              //  Room re = roomService.selectByPrimaryKey(Dt.getRname());
-              //  int number=re.getRoomnumber();
-                Room r=new Room();
-               // r.setRoomname(Dt.getRname());
-              //  r.setRoomnumber(number+Dt.getNumber());
-                roomService.updateByPrimaryKeySelective(r);
+                } else {//数据回滚
+                    roomService.updateByPrimaryKeyForNum(re.getRoomname(),re.getRoomnumber());
+                    roomOrder.setOrderstatus(3);
+                    roomOrderService.updateByPrimaryKeySelective(roomOrder);//更改订单为3，作废
+                    return "订单失败。";
+                }
 
-               // RoomOrderKey key=new RoomOrderKey(Dt.getOrderid(),Dt.getUid(),Dt.getRname());
-
-
-                roomOrder.setOrderstatus(3);
-                roomOrderService.updateByPrimaryKeySelective(roomOrder);//更改订单为3，作废
 
             }
-
-
-
         }
+        return "订单失败。";
     }
 
     //获取当前时间

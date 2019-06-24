@@ -35,4 +35,6 @@ public interface RoomOrderMapper {
     List <RoomOrder> selectByUserid(String uid);
 
     int selectByRDU(RoomOrder record);
+
+    RoomOrder selectByOrderid(int orderid);
 }

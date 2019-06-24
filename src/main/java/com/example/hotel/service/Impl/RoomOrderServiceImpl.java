@@ -86,4 +86,9 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     public int selectByRDU(RoomOrder record) {
         return roomOrderMapper.selectByRDU(record);
     }
+
+    @Override
+    public RoomOrder selectByOrderid(int orderid) {
+        return roomOrderMapper.selectByOrderid(orderid);
+    }
 }

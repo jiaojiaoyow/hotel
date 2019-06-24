@@ -193,6 +193,22 @@
       roomprice = #{roomprice,jdbcType=DOUBLE}
     where roomname = #{roomname,jdbcType=VARCHAR}
   </update>
+
+  <!--增加房间-->
+  <update id="updateByPrimaryKeyForNum" parameterType="map">
+    update room
+    set
+      roomnumber = roomnumber + #{roomnum}
+    where roomname = #{rname}
+  </update>
+  <!--减少房间-->
+  <update id="updateByPrimaryKeyForReduce" parameterType="map">
+    update room
+    set
+      roomnumber = roomnumber - #{roomnum}
+    where roomname = #{rname} and  roomnumber- #{roomnum}>=0
+  </update>
+
   <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.RoomExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

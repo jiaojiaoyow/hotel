@@ -33,5 +33,9 @@ public interface RoomMapper {
 
     int updateByPrimaryKey(Room record);
 
+    int updateByPrimaryKeyForNum(@Param("rname") String rname,@Param("roomnum") int roomnum);
+
+    int updateByPrimaryKeyForReduce(@Param("rname") String rname,@Param("roomnum") int roomnum);
+
 
 }
