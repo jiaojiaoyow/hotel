@@ -30,7 +30,8 @@
 	foreign key (uid) references user (uid)
 );
 
-create table assey( #文章
+<<<<<<< HEAD
+create table essay( #文章
   aid int primary key ,
   uid char(55),
   tiile varchar(200),
@@ -38,3 +39,25 @@ create table assey( #文章
   create_time date ,#生成时间
   imageUrl varchar(150)  #图片url
 )
+
+CREATE TABLE Coupon ( #优惠卷
+  `cid` int primary key ,
+  `cname` varchar(60) NOT NULL ,
+  `min_amount` double ,#满减到达金额
+  `amount` double ,#抵扣金额
+  #优惠卷的有效期的开始和结束日期
+  `send_start_date`  VARCHAR(50) ,
+  `send_end_date`VARCHAR(50)
+  #是否过期标识
+)
+
+create table getCoupon(  #领卷
+  uid char(55),
+  cid int,  #优惠卷id
+  status tinyint(4) DEFAULT 0 ,#零代表卷还未使用
+	#用户使用有效期
+  `use_start_date` VARCHAR(50) ,
+  `use_end_date` VARCHAR(50) ,
+	PRIMARY KEY(uid,cid)
+)
+

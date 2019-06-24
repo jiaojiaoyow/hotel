@@ -13,9 +13,10 @@ public class Asseycontroller {
     @Autowired
     private EssayService essayService;
     //得到数据库中的文章
-    @RequestMapping("getessay")
+    @RequestMapping("/getessay")
     public List<Essay> getessay(){
         List<Essay> essay=essayService.selectAll();
+        System.out.println();
         return essay;
     }
 }
