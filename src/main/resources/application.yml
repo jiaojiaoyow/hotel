@@ -10,12 +10,13 @@ logging:
         dao: debug
 server:
   port: ${port:8888}
+  tomcat:
+    max-http-header-size: 9999999
 
 # 记得替换成你的id和secret
 wechat:
-  appid: wx207bf36714907ae2
-  secret: 7aaa17bd243ecc39cc14d4984312e009
-
+  appid: wx4e03af15e71b5103
+  secret: 92db4d63cba43124d0a2a5499c445679
 ## h2
 #db:
 #  url: jdbc:h2:~/jiuask

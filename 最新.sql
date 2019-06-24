@@ -31,20 +31,13 @@
 );
 
 <<<<<<< HEAD
-create table assey( #文章
+create table essay( #文章
   aid int primary key ,
   uid char(55),
   tiile varchar(200),
   content text, #内容
   create_time date ,#生成时间
   imageUrl varchar(150)  #图片url
-=======
-create table essay(		#文章
-	uid char(55),
-	aname varchar(50),
-
-
->>>>>>> master
 )
 
 CREATE TABLE Coupon ( #优惠卷
@@ -53,8 +46,9 @@ CREATE TABLE Coupon ( #优惠卷
   `min_amount` double ,#满减到达金额
   `amount` double ,#抵扣金额
   #优惠卷的有效期的开始和结束日期
-  `send_start_date` int(11) NOT NULL default '0',
-  `send_end_date` int(11) NOT NULL default '0',
+  `send_start_date`  VARCHAR(50) ,
+  `send_end_date`VARCHAR(50)
+  #是否过期标识
 )
 
 create table getCoupon(  #领卷
@@ -62,9 +56,8 @@ create table getCoupon(  #领卷
   cid int,  #优惠卷id
   status tinyint(4) DEFAULT 0 ,#零代表卷还未使用
 	#用户使用有效期
-  `use_start_date` int(11) NOT NULL default '0',
-  `use_end_date` int(11) NOT NULL default '0',
+  `use_start_date` VARCHAR(50) ,
+  `use_end_date` VARCHAR(50) ,
 	PRIMARY KEY(uid,cid)
 )
-
 
