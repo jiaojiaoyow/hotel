@@ -239,4 +239,10 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <!--自己添加的-->
+  <select id="SelectAll" resultType="com.example.hotel.model.Coupon">
+    select * from coupon
+  </select>
+
 </mapper>

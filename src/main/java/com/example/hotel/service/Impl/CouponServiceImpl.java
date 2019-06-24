@@ -1,5 +1,6 @@
 package com.example.hotel.service.Impl;
 
+
 import com.example.hotel.dao.CouponMapper;
 import com.example.hotel.model.Coupon;
 import com.example.hotel.model.CouponExample;
@@ -12,8 +13,10 @@ import java.util.List;
 
 @Service("CouponService")
 public class CouponServiceImpl implements CouponService {
+
     @Autowired
     private CouponMapper couponMapper;
+
 
     @Override
     public long countByExample(CouponExample example) {
@@ -52,7 +55,9 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public Coupon selectByPrimaryKey(Integer cid) {
+
         return couponMapper.selectByPrimaryKey(cid);
+
     }
 
     @Override
@@ -74,4 +79,11 @@ public class CouponServiceImpl implements CouponService {
     public int updateByPrimaryKey(Coupon record) {
         return 0;
     }
+
+
+    @Override
+    public List<Coupon> SelectAll() {
+        return this.CouponMapper.SelectAll();
+    }
+
 }

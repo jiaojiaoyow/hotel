@@ -2,12 +2,14 @@ package com.example.hotel.service;
 
 import com.example.hotel.model.Coupon;
 import com.example.hotel.model.CouponExample;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
 public interface CouponService {
+
 
     long countByExample(CouponExample example);
 
@@ -32,4 +34,8 @@ public interface CouponService {
     int updateByPrimaryKeySelective(Coupon record);
 
     int updateByPrimaryKey(Coupon record);
+
+
+    List<Coupon> SelectAll();
 }
+

@@ -1,0 +1,34 @@
+package com.example.hotel.dao;
+
+import com.example.hotel.model.GetCoupon;
+import com.example.hotel.model.GetCouponExample;
+import com.example.hotel.model.GetCouponKey;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
+
+public interface GetCouponMapper {
+    long countByExample(GetCouponExample example);
+
+    int deleteByExample(GetCouponExample example);
+
+    int deleteByPrimaryKey(GetCouponKey key);
+
+    int insert(GetCoupon record);
+
+    int insertSelective(GetCoupon record);
+
+    List<GetCoupon> selectByExampleWithRowbounds(GetCouponExample example, RowBounds rowBounds);
+
+    List<GetCoupon> selectByExample(GetCouponExample example);
+
+    GetCoupon selectByPrimaryKey(GetCouponKey key);
+
+    int updateByExampleSelective(@Param("record") GetCoupon record, @Param("example") GetCouponExample example);
+
+    int updateByExample(@Param("record") GetCoupon record, @Param("example") GetCouponExample example);
+
+    int updateByPrimaryKeySelective(GetCoupon record);
+
+    int updateByPrimaryKey(GetCoupon record);
+}
