@@ -30,6 +30,8 @@ public interface CouponMapper {
     int updateByPrimaryKeySelective(Coupon record);
 
     int updateByPrimaryKey(Coupon record);
+
 //    自己增加的
     List<Coupon> SelectAll();
+
 }

@@ -1,4 +1,6 @@
 spring:
+
+
   thymeleaf:
     mode: HTML5
 logging:
@@ -26,7 +28,7 @@ wechat:
 
 # mysql
 db:
-  url: jdbc:mysql://localhost:3306/newhoteldb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+  url: jdbc:mysql://localhost:3306/newhoteldb?serverTimezone=UTC
   username: root
-  password: root
+  password: 123456
   driver: com.mysql.cj.jdbc.Driver

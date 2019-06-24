@@ -1,4 +1,5 @@
 Manifest-Version: 1.0
+
 Class-Path: spring-aop-5.1.7.RELEASE.jar mybatis-spring-boot-autoconfi
  gure-2.0.1.jar unbescape-1.1.6.RELEASE.jar thymeleaf-extras-java8time
  -3.0.4.RELEASE.jar mybatis-3.5.1.jar tomcat-embed-websocket-9.0.19.ja
@@ -24,6 +25,6 @@ Class-Path: spring-aop-5.1.7.RELEASE.jar mybatis-spring-boot-autoconfi
  t-starter-thymeleaf-2.1.5.RELEASE.jar mybatis-spring-boot-starter-2.0
  .1.jar fastjson-1.2.33.jar thymeleaf-3.0.11.RELEASE.jar jackson-datat
  ype-jsr310-2.9.8.jar jackson-annotations-2.9.0.jar spring-core-5.1.7.
- RELEASE.jar classmate-1.4.0.jar hibernate-validator-6.0.16.Final.jar
+ RELEASE.jar classmate-1.4.0.jar hibernate-validator-6.0.16.
 Main-Class: com.example.hotel.HotelApplication
 

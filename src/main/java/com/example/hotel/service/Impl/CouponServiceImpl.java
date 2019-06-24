@@ -15,7 +15,8 @@ import java.util.List;
 public class CouponServiceImpl implements CouponService {
 
     @Autowired
-    private CouponMapper CouponMapper;
+    private CouponMapper couponMapper;
+
 
     @Override
     public long countByExample(CouponExample example) {
@@ -54,7 +55,9 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public Coupon selectByPrimaryKey(Integer cid) {
-        return null;
+
+        return couponMapper.selectByPrimaryKey(cid);
+
     }
 
     @Override
@@ -77,8 +80,10 @@ public class CouponServiceImpl implements CouponService {
         return 0;
     }
 
+
     @Override
     public List<Coupon> SelectAll() {
         return this.CouponMapper.SelectAll();
     }
+
 }

@@ -3,8 +3,6 @@ package com.example.hotel.model;
 public class User {
     private String uid;
 
-    private String uname;
-
     private Double ubalance;
 
     private Integer ugrade;
@@ -29,14 +27,6 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid == null ? null : uid.trim();
-    }
-
-    public String getUname() {
-        return uname;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname == null ? null : uname.trim();
     }
 
     public Double getUbalance() {

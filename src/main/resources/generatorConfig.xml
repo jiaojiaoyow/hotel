@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <!--这个是依赖的路径，记得替换成自己的-->
     <classPathEntry
-            location="D:\Idea_Maven\m2\repository\mysql\mysql-connector-java\8.0.16\mysql-connector-java-8.0.16.jar"/>
+            location="G:\mybatis-generator-1.35-master\lib\mysql-connector-java-8.0.12.jar"/>
 
     <context id="table" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"></plugin>
@@ -15,9 +15,9 @@
             <property name="suppressAllComments" value="true"></property>
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/newhoteldb?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true"
+                        connectionURL="jdbc:mysql://localhost:3306/newhoteldb?serverTimezone=UTC"
                         userId="root"
-                        password="root">
+                        password="123456">
             <!--不生成withblog文件-->
             <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
@@ -41,11 +41,11 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+
         <table tableName="coupon" domainObjectName="Coupon">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="getcoupon" domainObjectName="GetCoupon">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
+  
+           
     </context>
 </generatorConfiguration>
