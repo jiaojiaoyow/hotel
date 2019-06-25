@@ -48,7 +48,7 @@ public class CouponController {
         Date nowtime=new Date();
         //设置开始和结束时间
         getCoupon.setUseStartDate(DateUtil.change_str(nowtime));
-        getCoupon.setUseEndDate(DateUtil.addtime(nowtime,5));
+        getCoupon.setUseEndDate(DateUtil.addtime(nowtime,5));//有五天的时间
         getCouponService.insert(getCoupon);
     }
 }

@@ -37,7 +37,7 @@ create table essay( #文章
   tiile varchar(200),
   content text, #内容
   create_time date ,#生成时间
-  imageUrl varchar(150)  #图片url
+  image Blob  #图片url
 )
 
 CREATE TABLE Coupon ( #优惠卷
