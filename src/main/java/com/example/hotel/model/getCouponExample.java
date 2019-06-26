@@ -3,14 +3,14 @@ package com.example.hotel.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class getCouponExample {
+public class GetCouponExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public getCouponExample() {
+    public GetCouponExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

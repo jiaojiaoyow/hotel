@@ -1,6 +1,6 @@
 package com.example.hotel.model;
 
-public class getCoupon extends getCouponKey {
+public class GetCoupon extends GetCouponKey {
     private Byte status;
 
     private String useStartDate;

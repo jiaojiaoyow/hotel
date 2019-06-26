@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.hotel.dao.getCouponMapper">
-  <resultMap id="BaseResultMap" type="com.example.hotel.model.getCoupon">
+<mapper namespace="com.example.hotel.dao.GetCouponMapper">
+  <resultMap id="BaseResultMap" type="com.example.hotel.model.GetCoupon">
     <id column="uid" jdbcType="CHAR" property="uid" />
     <id column="cid" jdbcType="INTEGER" property="cid" />
     <result column="status" jdbcType="TINYINT" property="status" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     uid, cid, status, use_start_date, use_end_date
   </sql>
-  <select id="selectByExample" parameterType="com.example.hotel.model.getCouponExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.hotel.model.GetCouponExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -83,31 +83,31 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.example.hotel.model.getCouponKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.example.hotel.model.GetCouponKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from getcoupon
     where uid = #{uid,jdbcType=CHAR}
       and cid = #{cid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.example.hotel.model.getCouponKey">
+  <delete id="deleteByPrimaryKey" parameterType="com.example.hotel.model.GetCouponKey">
     delete from getcoupon
     where uid = #{uid,jdbcType=CHAR}
       and cid = #{cid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.hotel.model.getCouponExample">
+  <delete id="deleteByExample" parameterType="com.example.hotel.model.GetCouponExample">
     delete from getcoupon
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.hotel.model.getCoupon">
+  <insert id="insert" parameterType="com.example.hotel.model.GetCoupon">
     insert into getcoupon (uid, cid, status, 
       use_start_date, use_end_date)
     values (#{uid,jdbcType=CHAR}, #{cid,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
       #{useStartDate,jdbcType=VARCHAR}, #{useEndDate,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.hotel.model.getCoupon">
+  <insert id="insertSelective" parameterType="com.example.hotel.model.GetCoupon">
     insert into getcoupon
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -144,7 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.hotel.model.getCouponExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.example.hotel.model.GetCouponExample" resultType="java.lang.Long">
     select count(*) from getcoupon
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.getCoupon">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.GetCoupon">
     update getcoupon
     <set>
       <if test="status != null">
@@ -200,7 +200,7 @@
     where uid = #{uid,jdbcType=CHAR}
       and cid = #{cid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.getCoupon">
+  <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.GetCoupon">
     update getcoupon
     set status = #{status,jdbcType=TINYINT},
       use_start_date = #{useStartDate,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
     where uid = #{uid,jdbcType=CHAR}
       and cid = #{cid,jdbcType=INTEGER}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.getCouponExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.GetCouponExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct

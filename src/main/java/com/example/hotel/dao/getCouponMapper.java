@@ -1,34 +1,34 @@
 package com.example.hotel.dao;
 
-import com.example.hotel.model.getCoupon;
-import com.example.hotel.model.getCouponExample;
-import com.example.hotel.model.getCouponKey;
+import com.example.hotel.model.GetCoupon;
+import com.example.hotel.model.GetCouponExample;
+import com.example.hotel.model.GetCouponKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-public interface getCouponMapper {
-    long countByExample(getCouponExample example);
+public interface GetCouponMapper {
+    long countByExample(GetCouponExample example);
 
-    int deleteByExample(getCouponExample example);
+    int deleteByExample(GetCouponExample example);
 
-    int deleteByPrimaryKey(getCouponKey key);
+    int deleteByPrimaryKey(GetCouponKey key);
 
-    int insert(getCoupon record);
+    int insert(GetCoupon record);
 
-    int insertSelective(getCoupon record);
+    int insertSelective(GetCoupon record);
 
-    List<getCoupon> selectByExampleWithRowbounds(getCouponExample example, RowBounds rowBounds);
+    List<GetCoupon> selectByExampleWithRowbounds(GetCouponExample example, RowBounds rowBounds);
 
-    List<getCoupon> selectByExample(getCouponExample example);
+    List<GetCoupon> selectByExample(GetCouponExample example);
 
-    getCoupon selectByPrimaryKey(getCouponKey key);
+    GetCoupon selectByPrimaryKey(GetCouponKey key);
 
-    int updateByExampleSelective(@Param("record") getCoupon record, @Param("example") getCouponExample example);
+    int updateByExampleSelective(@Param("record") GetCoupon record, @Param("example") GetCouponExample example);
 
-    int updateByExample(@Param("record") getCoupon record, @Param("example") getCouponExample example);
+    int updateByExample(@Param("record") GetCoupon record, @Param("example") GetCouponExample example);
 
-    int updateByPrimaryKeySelective(getCoupon record);
+    int updateByPrimaryKeySelective(GetCoupon record);
 
-    int updateByPrimaryKey(getCoupon record);
+    int updateByPrimaryKey(GetCoupon record);
 }

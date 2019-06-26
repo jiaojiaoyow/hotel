@@ -1,6 +1,6 @@
 package com.example.hotel.model;
 
-public class getCouponKey {
+public class GetCouponKey {
     private String uid;
 
     private Integer cid;
