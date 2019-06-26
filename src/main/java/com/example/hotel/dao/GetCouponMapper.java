@@ -1,5 +1,6 @@
 package com.example.hotel.dao;
 
+import com.example.hotel.model.Coupon;
 import com.example.hotel.model.GetCoupon;
 import com.example.hotel.model.GetCouponExample;
 import com.example.hotel.model.GetCouponKey;
@@ -31,4 +32,6 @@ public interface GetCouponMapper {
     int updateByPrimaryKeySelective(GetCoupon record);
 
     int updateByPrimaryKey(GetCoupon record);
+
+    List<Coupon> selectByUid(String uid);
 }

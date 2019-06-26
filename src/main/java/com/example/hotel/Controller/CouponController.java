@@ -35,10 +35,10 @@ public class CouponController {
         return mess;
     }
 
-    //查询用户个人拥有的优惠卷
+    //查询用户个人拥有的不过期的优惠卷,传回uid
     @RequestMapping("selUserCoupon")
-    public List<Coupon> Sel_User_message(){
-        List<Coupon> mess=couponService.SelectAll();
+    public List<Coupon> Sel_User_message(String uid){
+        List<Coupon> mess=getCouponService.selectByUid(uid);
         return mess;
     }
 

@@ -1,16 +1,22 @@
 package com.example.hotel.service.Impl;
 
+import com.example.hotel.dao.GetCouponMapper;
+import com.example.hotel.model.Coupon;
 import com.example.hotel.model.GetCoupon;
 import com.example.hotel.model.GetCouponExample;
 import com.example.hotel.model.GetCouponKey;
 import com.example.hotel.service.GetCouponService;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("GetCouponService")
 public class GetCouponServiceImpl implements GetCouponService {
+
+    @Autowired
+    private GetCouponMapper getCouponMapper;
 
 
     @Override
@@ -72,4 +78,11 @@ public class GetCouponServiceImpl implements GetCouponService {
     public int updateByPrimaryKey(GetCoupon record) {
         return 0;
     }
+
+    @Override
+    public List<Coupon> selectByUid(String uid) {
+        return this.getCouponMapper.selectByUid(uid);
+    }
+
+
 }

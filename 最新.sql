@@ -1,12 +1,39 @@
 ﻿ create database newhoteldb;
  use newhoteldb;
+
+DROP TABLE IF EXISTS `room`;
+CREATE TABLE `room` (
+  `roomname` varchar(50) NOT NULL,
+  `roomintroduce` varchar(150) DEFAULT NULL,
+  `roomnumber` int(4) DEFAULT NULL,
+  `roomprice` double(16,4) DEFAULT NULL,
+  PRIMARY KEY (`roomname`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+#
+# Structure for table "roomorder"
+#
+
+DROP TABLE IF EXISTS `roomorder`;
+CREATE TABLE `roomorder` (
+  `orderid` int(11) NOT NULL AUTO_INCREMENT,
+  `roomname` varchar(50) NOT NULL,
+  `uid` char(55) NOT NULL DEFAULT '',
+  `uname` varchar(20) DEFAULT NULL,
+  `uphone` varchar(20) DEFAULT NULL,
+  `roomnumber` int(4) DEFAULT NULL,
+  `ordertime` datetime DEFAULT NULL,
+  `leavetime` datetime DEFAULT NULL,
+  `orderday` int(4) DEFAULT NULL,
+  `totalprice` double(16,4) DEFAULT NULL,
+  `orderstatus` int(4) DEFAULT '1',
+  `cid` int(11) DEFAULT NULL,
+  `arrivetime` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`orderid`,`uid`,`roomname`),
+  KEY `uid` (`uid`),
+  KEY `roomname` (`roomname`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
  
- create table Room(	
-		roomname varchar(50) primary key,	
-		roomintroduce varchar(150),		
-		roomnumber varchar(5), 	
-		roomprice double
- );
 
  create table user(		#用户
 	uid char(55) NOT NULL primary key,  #接收openid
@@ -20,15 +47,7 @@
  	gmt_modified bigint(20) DEFAULT NULL,
  	status tinyint(4) DEFAULT 1
 );
- create table roomorder(		#订单
-	orderid int auto_increment,  #订单号
-	uid char(55),		#用户id
-	roomnumber int(4),		#订房数量
-	ordertime  datetime,	#入住时间
-	orderday     int(4), 		#入住天数
-	primary key(orderid,uid),
-	foreign key (uid) references user (uid)
-);
+
 
 <<<<<<< HEAD
 create table essay( #文章

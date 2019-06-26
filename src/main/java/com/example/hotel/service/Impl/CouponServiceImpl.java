@@ -83,7 +83,7 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public List<Coupon> SelectAll() {
-        return this.CouponMapper.SelectAll();
+        return this.couponMapper.SelectAll();
     }
 
 }
