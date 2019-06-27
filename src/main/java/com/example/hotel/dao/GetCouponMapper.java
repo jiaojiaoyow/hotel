@@ -33,5 +33,5 @@ public interface GetCouponMapper {
 
     int updateByPrimaryKey(GetCoupon record);
 
-    List<Coupon> selectByUid(String uid);
+    public List<GetCoupon> selectByUid(String uid);
 }

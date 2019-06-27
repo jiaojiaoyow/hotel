@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
                 userMapper.insert(user);
             }
         }catch (Exception e){
-
+            System.out.println(e);
         }
 
 

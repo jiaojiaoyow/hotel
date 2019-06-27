@@ -222,4 +222,9 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!--自己添加的-->
+  <select id="selectByUid" resultType="com.example.hotel.model.Coupon" parameterType="java.lang.String">
+    select * from Coupon where cid=(select cid from getcoupon where uid=#{uid} and status= 0 )
+  </select>
+
 </mapper>

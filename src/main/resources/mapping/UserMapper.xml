@@ -3,6 +3,7 @@
 <mapper namespace="com.example.hotel.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.example.hotel.model.User">
     <id column="uid" jdbcType="CHAR" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
     <result column="ubalance" jdbcType="DOUBLE" property="ubalance" />
     <result column="ugrade" jdbcType="INTEGER" property="ugrade" />
     <result column="token" jdbcType="CHAR" property="token" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uid, ubalance, ugrade, token, nickName, avatarUrl, gender, gmt_create, gmt_modified, 
+    uid, uname, ubalance, ugrade, token, nickName, avatarUrl, gender, gmt_create, gmt_modified, 
     status
   </sql>
   <select id="selectByExample" parameterType="com.example.hotel.model.UserExample" resultMap="BaseResultMap">
@@ -106,20 +107,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.hotel.model.User">
-    insert into user (uid, ubalance, ugrade, 
-      token, nickName, avatarUrl, 
-      gender, gmt_create, gmt_modified, 
-      status)
-    values (#{uid,jdbcType=CHAR}, #{ubalance,jdbcType=DOUBLE}, #{ugrade,jdbcType=INTEGER}, 
-      #{token,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=TINYINT}, #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT}, 
-      #{status,jdbcType=TINYINT})
+    insert into user (uid, uname, ubalance, 
+      ugrade, token, nickName, 
+      avatarUrl, gender, gmt_create, 
+      gmt_modified, status)
+    values (#{uid,jdbcType=CHAR}, #{uname,jdbcType=VARCHAR}, #{ubalance,jdbcType=DOUBLE}, 
+      #{ugrade,jdbcType=INTEGER}, #{token,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{avatarurl,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, #{gmtCreate,jdbcType=BIGINT}, 
+      #{gmtModified,jdbcType=BIGINT}, #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.example.hotel.model.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
         uid,
+      </if>
+      <if test="uname != null">
+        uname,
       </if>
       <if test="ubalance != null">
         ubalance,
@@ -152,6 +156,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uid != null">
         #{uid,jdbcType=CHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
       </if>
       <if test="ubalance != null">
         #{ubalance,jdbcType=DOUBLE},
@@ -194,6 +201,9 @@
       <if test="record.uid != null">
         uid = #{record.uid,jdbcType=CHAR},
       </if>
+      <if test="record.uname != null">
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
       <if test="record.ubalance != null">
         ubalance = #{record.ubalance,jdbcType=DOUBLE},
       </if>
@@ -229,6 +239,7 @@
   <update id="updateByExample" parameterType="map">
     update user
     set uid = #{record.uid,jdbcType=CHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
       ubalance = #{record.ubalance,jdbcType=DOUBLE},
       ugrade = #{record.ugrade,jdbcType=INTEGER},
       token = #{record.token,jdbcType=CHAR},
@@ -245,6 +256,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.User">
     update user
     <set>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
       <if test="ubalance != null">
         ubalance = #{ubalance,jdbcType=DOUBLE},
       </if>
@@ -277,7 +291,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.User">
     update user
-    set ubalance = #{ubalance,jdbcType=DOUBLE},
+    set uname = #{uname,jdbcType=VARCHAR},
+      ubalance = #{ubalance,jdbcType=DOUBLE},
       ugrade = #{ugrade,jdbcType=INTEGER},
       token = #{token,jdbcType=CHAR},
       nickName = #{nickname,jdbcType=VARCHAR},
@@ -288,15 +303,12 @@
       status = #{status,jdbcType=TINYINT}
     where uid = #{uid,jdbcType=CHAR}
   </update>
-
-  <!--更新余额，减操作-->
-  <update id="updateByPrimaryKeyForBalance" parameterType="map">
+    <!--更新余额，减操作-->
+    <update id="updateByPrimaryKeyForBalance" parameterType="map">
     update user
     set ubalance = ubalance - #{rebalance,jdbcType=DOUBLE}
     where uid = #{userid,jdbcType=CHAR}
   </update>
-
-
   <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

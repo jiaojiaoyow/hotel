@@ -1,15 +1,13 @@
-package com.example.hotel.service;
+package com.example.hotel.dao;
 
-import com.example.hotel.model.Coupon;
 import com.example.hotel.model.GetCoupon;
 import com.example.hotel.model.GetCouponExample;
 import com.example.hotel.model.GetCouponKey;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import java.util.List;
-
-public interface GetCouponService {
+public interface GetCouponMapper {
     long countByExample(GetCouponExample example);
 
     int deleteByExample(GetCouponExample example);
@@ -33,6 +31,4 @@ public interface GetCouponService {
     int updateByPrimaryKeySelective(GetCoupon record);
 
     int updateByPrimaryKey(GetCoupon record);
-
-    public List<GetCoupon> selectByUid(String uid);
 }

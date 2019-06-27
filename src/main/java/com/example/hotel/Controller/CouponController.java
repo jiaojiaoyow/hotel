@@ -37,9 +37,20 @@ public class CouponController {
 
     //查询用户个人拥有的不过期的优惠卷,传回uid
     @RequestMapping("selUserCoupon")
-    public List<Coupon> Sel_User_message(String uid){
-        List<Coupon> mess=getCouponService.selectByUid(uid);
-        return mess;
+    public List<Coupon> Sel_User_message(String uid) throws ParseException{
+        Date nowtime=new Date();
+        List<Coupon> UserCoupon=null;
+        List<GetCoupon> mess=getCouponService.selectByUid(uid);
+        for (GetCoupon temp:mess
+             ) {
+            if(temp.getStatus()!=0&&DateUtil.change_Date(temp.getUseEndDate()).getTime()<nowtime.getTime()){
+                UserCoupon.add(couponService.selectByPrimaryKey(temp.getCid()));
+            }
+            else {
+                couponService.deleteByPrimaryKey(temp.getCid());
+            }
+        }
+        return UserCoupon;
     }
 
     //领取优惠卷,需要前端传回uid，cid，cname
