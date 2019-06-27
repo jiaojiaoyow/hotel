@@ -30,4 +30,7 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    //更新余额，减操作
+    int updateByPrimaryKeyForBalance(@Param("userid") String userid,@Param("rebalance") Double rebalance);
 }

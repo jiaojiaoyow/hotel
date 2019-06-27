@@ -288,6 +288,15 @@
       status = #{status,jdbcType=TINYINT}
     where uid = #{uid,jdbcType=CHAR}
   </update>
+
+  <!--更新余额，减操作-->
+  <update id="updateByPrimaryKeyForBalance" parameterType="map">
+    update user
+    set ubalance = ubalance - #{rebalance,jdbcType=DOUBLE}
+    where uid = #{userid,jdbcType=CHAR}
+  </update>
+
+
   <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
