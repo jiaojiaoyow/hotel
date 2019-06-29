@@ -1,5 +1,6 @@
 package com.example.hotel.Controller;
 
+import com.example.hotel.DTO.ResultDTO;
 import com.example.hotel.model.Essay;
 import com.example.hotel.service.EssayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,37 +18,36 @@ import java.util.List;
 public class Asseycontroller {
     @Autowired
     private EssayService essayService;
+
     //得到数据库中的文章
-    @RequestMapping("/getessay")
-    public List<Essay> getessay(){
-        List<Essay> essay=essayService.selectAll();
-        System.out.println();
-        return essay;
+    @RequestMapping("/api/getEssay")
+    public ResultDTO getessay(){
+        ResultDTO resultDTO=new ResultDTO();
+        try {
+            List<Essay> essay=essayService.selectAll();
+            if(essay==null){
+                return resultDTO.fail();
+            }
+            return resultDTO.ok(essay);
+
+        }catch (Exception e){
+            return resultDTO.unkonwFail(e.toString());
+        }
+
     }
 
-//    @RequestMapping(value = "saveimg")
-//    public Object searchMember( HttpServletRequest request,
-//                                @RequestParam("relationid")Long relationid){
-//
-//        GenericResult result = new GenericResult();// 得到文件
-//        MultipartFile file = ((MultipartHttpServletRequest) request).getFile("file");
-//
-//        FilterRelationCondition filterRelationCondition = new FilterRelationCondition();
-//        filterRelationCondition.setId(relationid);
-//        Relation relation = relationMapper.filterRelation(filterRelationCondition).get(0);
-//        try {
-//            byte[] data;
-//            data = file.getBytes();
-//            BaseRelationShipPhoto photo = new BaseRelationShipPhoto();
-//            photo.setEmployeeId(relation.getEmployeeId().toString());
-//            photo.setRelationshipId(relation.getId());
-//            photo.setPhoto(data);
-//            relationMapper.insertRelationPhoto(photo);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        result.success("上传成功");
-//        return result;
-//    }
+    @RequestMapping("/putEssay")
+    public ResultDTO putEssay(Essay essay){
+        ResultDTO resultDTO=new ResultDTO();
+        try {
+            int flag=essayService.insertSelective(essay);
+            if(flag==0){
+                return resultDTO.fail("数据库插入失败");
+            }
+            return resultDTO.ok(null);
+        }catch (Exception e){
+            return resultDTO.unkonwFail(e.toString());
+        }
+    }
 
 }

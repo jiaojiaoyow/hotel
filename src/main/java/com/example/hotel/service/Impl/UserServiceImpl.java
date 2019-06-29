@@ -35,23 +35,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public User getByToken(String token) {
-        UserExample userExample = new UserExample();
-        userExample.createCriteria().andTokenEqualTo(token);
-        List<User> users = userMapper.selectByExample(userExample);
-        if (users != null && users.size() != 0) {
-            return users.get(0);
-        }
-        return null;
-    }
-
     @Override
     public User selectByPrimaryKey(String uid) {
         return userMapper.selectByPrimaryKey(uid);
     }
 
-    @Override
-    public int updateByPrimaryKeyForBalance(String userid, Double rebalance) {
-        return userMapper.updateByPrimaryKeyForBalance(userid,rebalance);
-    }
+
 }
