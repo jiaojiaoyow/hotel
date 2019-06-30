@@ -42,7 +42,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="coupon" domainObjectName="Coupon">
+        <table tableName="troroom" domainObjectName="Troroom">
             <property name="useActualColumnNames" value="false"/>
         </table>
   
