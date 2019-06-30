@@ -111,6 +111,30 @@
 
   </select>
 
+  <!--所有已成功付款待处理订单-->
+  <select id="selectAllPayOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from roomorder
+    where  orderstatus= 2
+  </select>
+
+  <!--所有订单，包括失效完成-->
+  <select id="selectAllOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from roomorder
+  </select>
+
+  <!--所有已经完成订单-->
+  <select id="selectAllCompleteOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from roomorder
+    where orderstatus = 4
+  </select>
+
+
 
 
 

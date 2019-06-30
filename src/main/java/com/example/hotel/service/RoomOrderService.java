@@ -39,4 +39,10 @@ public interface RoomOrderService {
     int selectByRDU(RoomOrder record);
 
     RoomOrder selectByOrderid(int orderid);
+
+    List<RoomOrder> selectAllCompleteOrder();
+
+    List<RoomOrder> selectAllOrder();
+
+    List<RoomOrder> selectAllPayOrder();
 }

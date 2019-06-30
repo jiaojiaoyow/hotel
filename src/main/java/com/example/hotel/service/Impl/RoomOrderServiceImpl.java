@@ -91,4 +91,19 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     public RoomOrder selectByOrderid(int orderid) {
         return roomOrderMapper.selectByOrderid(orderid);
     }
+
+    @Override
+    public List<RoomOrder> selectAllCompleteOrder() {
+        return roomOrderMapper.selectAllCompleteOrder();
+    }
+
+    @Override
+    public List<RoomOrder> selectAllOrder() {
+        return roomOrderMapper.selectAllOrder();
+    }
+
+    @Override
+    public List<RoomOrder> selectAllPayOrder() {
+        return roomOrderMapper.selectAllPayOrder();
+    }
 }
