@@ -21,8 +21,6 @@ public class Mycontroller {
         String uid="1234";
         List<RoomOrder> roomOrder=new ArrayList<RoomOrder>();
         roomOrder=roomOrderService.selectByUserid(uid);
-
-
         return roomOrder;
     }
 

@@ -41,11 +41,9 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="essay" domainObjectName="Essay">
+        <table tableName="company" domainObjectName="Company">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="getcoupon" domainObjectName="GetCoupon">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
+
     </context>
 </generatorConfiguration>

@@ -1,6 +1,7 @@
 package com.example.hotel.service;
 
 import com.example.hotel.model.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
     public void saveOrUpdate(User user);
-    public User getByToken(String token);
+
+    User selectByPrimaryKey(String uid);
+
+    public int updateByPrimaryKeyForBalance(String userid, Double rebalance);
+
 
 }

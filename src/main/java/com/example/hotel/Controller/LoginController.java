@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 /**
  * 不要在意get和set方法的
@@ -28,7 +30,8 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping("/api/login")
-    public ResultDTO2 login(@RequestBody LoginDTO loginDTO){
+    public ResultDTO login(@RequestBody LoginDTO loginDTO){
+        ResultDTO resultDTO=new ResultDTO();
         try{
             //HttpSession session=
             //使用code调用微信api来获取openid和
@@ -40,17 +43,18 @@ public class LoginController {
             UserDTO user1=JSON.parseObject(loginDTO.getRawData(),UserDTO.class);
             user.setUid(sessionDTO.getOpenid());
             userService.saveOrUpdate(user);
-            //返回用户基本信息
-            ResultDTO2 resultDTO2=new ResultDTO2();
-            resultDTO2.setOpenid(sessionDTO.getOpenid());
-            resultDTO2.setSession_key(sessionDTO.getSessionKey());
-            resultDTO2.setUser(user);
-            return resultDTO2;
-        }catch (ErrorCodeException e) {
-            System.out.println(e);
-            return null;
+            //设置token
+//            if(token.getOpenid()==null) {
+//                token.setOpenid(sessionDTO.getOpenid());
+//                token.setTokenid(UUID.randomUUID().toString());
+//            }
+            if (user==null){
+                return resultDTO.fail();
+            }
+            return resultDTO.ok(user);
+
         } catch (Exception e) {
-            System.out.println(e);
+            resultDTO.unkonwFail(e.toString());
             return null;
         }
     }

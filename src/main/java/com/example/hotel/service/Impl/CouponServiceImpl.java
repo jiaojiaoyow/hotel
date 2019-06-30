@@ -38,10 +38,7 @@ public class CouponServiceImpl implements CouponService {
         return 0;
     }
 
-    @Override
-    public int insertSelective(Coupon record) {
-        return 0;
-    }
+
 
     @Override
     public List<Coupon> selectByExampleWithRowbounds(CouponExample example, RowBounds rowBounds) {
@@ -53,12 +50,7 @@ public class CouponServiceImpl implements CouponService {
         return null;
     }
 
-    @Override
-    public Coupon selectByPrimaryKey(Integer cid) {
 
-        return couponMapper.selectByPrimaryKey(cid);
-
-    }
 
     @Override
     public int updateByExampleSelective(Coupon record, CouponExample example) {
@@ -80,10 +72,22 @@ public class CouponServiceImpl implements CouponService {
         return 0;
     }
 
-
+    //自己改的
     @Override
     public List<Coupon> SelectAll() {
+
         return this.couponMapper.SelectAll();
+
+    }
+
+    @Override
+    public int insertSelective(Coupon record) {
+        return this.couponMapper.insertSelective(record);
+    }
+
+    @Override
+    public Coupon selectByPrimaryKey(Integer cid) {
+        return this.couponMapper.selectByPrimaryKey(cid);
     }
 
 }

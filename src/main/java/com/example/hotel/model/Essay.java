@@ -11,6 +11,10 @@ public class Essay {
 
     private Date createTime;
 
+    private String imageurl;
+
+    private String content;
+
     public Integer getAid() {
         return aid;
     }
@@ -41,5 +45,21 @@ public class Essay {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl == null ? null : imageurl.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 }

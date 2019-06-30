@@ -2,12 +2,8 @@ package com.example.hotel.Controller;
 
 
 import com.example.hotel.DTO.cOrderDTO;
-import com.example.hotel.model.Coupon;
-import com.example.hotel.model.Room;
-import com.example.hotel.model.RoomOrder;
-import com.example.hotel.service.CouponService;
-import com.example.hotel.service.RoomOrderService;
-import com.example.hotel.service.RoomService;
+import com.example.hotel.model.*;
+import com.example.hotel.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,19 +18,27 @@ public class CreateOrderController {
 
 
     @Autowired
+    private UserService userService;
+    @Autowired
     private RoomService roomService;
     @Autowired
     private RoomOrderService roomOrderService;
     @Autowired
     private CouponService couponService;
+    @Autowired
+    private GetCouponService getCouponService;
 
     //检查优惠卷
-    public  Double getCoupon(int cid){
-        if(cid != 0  ) {
+    public  Double getCoupon(int cid,String uid){
+        if(cid != 0  && uid !=null && !uid.equals("")) {
+            GetCouponKey key=new GetCouponKey();
+            key.setCid(cid);
+            key.setUid(uid);
+            GetCoupon gc=getCouponService.selectByPrimaryKey(key);//获取用户领取的优惠卷信息
             Coupon coupon = couponService.selectByPrimaryKey(cid);
+            //if(gc.getUseEndDate())
             if (coupon != null ) {
                 Double amount = coupon.getAmount();
-
                 return amount;
             }
         }
@@ -46,8 +50,10 @@ public class CreateOrderController {
     public cOrderDTO createOrder(@RequestBody RoomOrder roomOrder){
 
         try{
+            System.out.println("roomname: "+roomOrder.getUname());
+            System.out.println("uid: "+roomOrder.getUid());
         //HttpServletRequest request
-        if(roomOrder !=null) {
+        if(roomOrder !=null && roomOrder.getUid()!=null && !roomOrder.equals("")) {
 
             String uid = roomOrder.getUid();                 //"1234";
             String roomname = roomOrder.getRoomname();       //"阳光大床房";
@@ -62,7 +68,7 @@ public class CreateOrderController {
             if (r != null) {
                 int num = r.getRoomnumber(); //剩余房间数
                 if (num > 0 && num - roomnumber >= 0) {
-                    double amount = getCoupon(roomOrder.getCid());
+                    double amount = getCoupon(roomOrder.getCid(),uid);
                     double price = r.getRoomprice() * roomnumber * days - amount; //总价，算优惠卷
                     String s = DateToString();
                     ordertime += s.substring(10);
@@ -114,21 +120,32 @@ public class CreateOrderController {
     @RequestMapping("/api/judgeorder")
     public String JudgeOrder(@RequestBody cOrderDTO Dt){
 
+
+
         if(Dt !=null){
+            User u=userService.selectByPrimaryKey(Dt.getUid());
             RoomOrder re=roomOrderService.selectByOrderid(Dt.getOrderid());
 
-            if( Dt.getUid().equals(re.getUid()) &&  re.getOrderstatus()==1 ) { //uid相同且订单状态为1
+            if( Dt.getUid().equals(re.getUid()) &&  re.getOrderstatus()==1 && re.getUid().equals(u.getUid())) { //uid相同且订单状态为1,and uid存在
                 RoomOrder roomOrder=new RoomOrder();
                 roomOrder.setUid(Dt.getUid());
                 roomOrder.setOrderid(re.getOrderid());
                 roomOrder.setRoomname(re.getRoomname());
                 if (Dt.getStatus() == 2) {  //支付成功
 
-                    if (Dt.getBalance() != 0.0) {//余额
-
-
+                    if (Dt.getBalance() != 0.0 && u.getUbalance() -Dt.getBalance() >=0) {//余额
+                        userService.updateByPrimaryKeyForBalance(u.getUid(),Dt.getBalance());//更新余额，减操作
                     }
                     //设定优惠卷生效
+                    Byte x=1;
+                    GetCoupon key=new GetCoupon();
+                    key.setUid(re.getUid());
+                    key.setCid(re.getCid());
+                    key.setStatus(x);  //优惠卷设定为1，标记为已使用
+                    getCouponService.updateByPrimaryKeySelective(key);//优惠券生效
+
+
+
                     roomOrder.setOrderstatus(2);
                     roomOrderService.updateByPrimaryKeySelective(roomOrder);//更改订单为2 成功
                     return "订单成功。";

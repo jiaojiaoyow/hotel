@@ -13,7 +13,7 @@ wechat:
   secret: ${WECHAT_SECRET}
 
 db:
-  url: jdbc:mysql://localhost:3306/newhoteldb?serverTimezone=UTC
+  url: jdbc:mysql://localhost:3306/newhoteldb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
   username: ${JDBC_DATABASE_USERNAME}
   password: ${JDBC_DATABASE_PASSWORD}
   driver: com.mysql.cj.jdbc.Driver

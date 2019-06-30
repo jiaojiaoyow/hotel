@@ -34,5 +34,5 @@ public interface GetCouponService {
 
     int updateByPrimaryKey(GetCoupon record);
 
-    List<Coupon> selectByUid(String uid);
+    public List<GetCoupon> selectByUid(String uid);
 }

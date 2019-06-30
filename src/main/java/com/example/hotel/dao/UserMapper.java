@@ -30,4 +30,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    public int updateByPrimaryKeyForBalance(String userid, Double rebalance);
 }
