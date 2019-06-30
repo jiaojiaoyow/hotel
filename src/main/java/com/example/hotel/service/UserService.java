@@ -11,10 +11,9 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     public void saveOrUpdate(User user);
 
-    public User getByToken(String token);
-
     User selectByPrimaryKey(String uid);
 
-    int updateByPrimaryKeyForBalance(@Param("userid") String userid, @Param("rebalance") Double rebalance);
+    public int updateByPrimaryKeyForBalance(String userid, Double rebalance);
+
 
 }

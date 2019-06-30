@@ -1,5 +1,6 @@
 package com.example.hotel.service;
 
+import com.example.hotel.model.Coupon;
 import com.example.hotel.model.GetCoupon;
 import com.example.hotel.model.GetCouponExample;
 import com.example.hotel.model.GetCouponKey;
@@ -32,4 +33,6 @@ public interface GetCouponService {
     int updateByPrimaryKeySelective(GetCoupon record);
 
     int updateByPrimaryKey(GetCoupon record);
+
+    public List<GetCoupon> selectByUid(String uid);
 }

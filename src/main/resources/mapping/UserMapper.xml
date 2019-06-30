@@ -5,13 +5,12 @@
     <id column="uid" jdbcType="CHAR" property="uid" />
     <result column="ubalance" jdbcType="DOUBLE" property="ubalance" />
     <result column="ugrade" jdbcType="INTEGER" property="ugrade" />
-    <result column="token" jdbcType="CHAR" property="token" />
     <result column="nickName" jdbcType="VARCHAR" property="nickname" />
     <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl" />
     <result column="gender" jdbcType="TINYINT" property="gender" />
     <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,8 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uid, ubalance, ugrade, token, nickName, avatarUrl, gender, gmt_create, gmt_modified, 
-    status
+    uid, ubalance, ugrade, nickName, avatarUrl, gender, gmt_create, gmt_modified, status
   </sql>
   <select id="selectByExample" parameterType="com.example.hotel.model.UserExample" resultMap="BaseResultMap">
     select
@@ -107,13 +105,13 @@
   </delete>
   <insert id="insert" parameterType="com.example.hotel.model.User">
     insert into user (uid, ubalance, ugrade, 
-      token, nickName, avatarUrl, 
-      gender, gmt_create, gmt_modified, 
-      status)
+      nickName, avatarUrl, gender, 
+      gmt_create, gmt_modified, status
+      )
     values (#{uid,jdbcType=CHAR}, #{ubalance,jdbcType=DOUBLE}, #{ugrade,jdbcType=INTEGER}, 
-      #{token,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=TINYINT}, #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT}, 
-      #{status,jdbcType=TINYINT})
+      #{nickname,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, 
+      #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.hotel.model.User">
     insert into user
@@ -126,9 +124,6 @@
       </if>
       <if test="ugrade != null">
         ugrade,
-      </if>
-      <if test="token != null">
-        token,
       </if>
       <if test="nickname != null">
         nickName,
@@ -159,9 +154,6 @@
       <if test="ugrade != null">
         #{ugrade,jdbcType=INTEGER},
       </if>
-      <if test="token != null">
-        #{token,jdbcType=CHAR},
-      </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
       </if>
@@ -178,7 +170,7 @@
         #{gmtModified,jdbcType=BIGINT},
       </if>
       <if test="status != null">
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -200,9 +192,6 @@
       <if test="record.ugrade != null">
         ugrade = #{record.ugrade,jdbcType=INTEGER},
       </if>
-      <if test="record.token != null">
-        token = #{record.token,jdbcType=CHAR},
-      </if>
       <if test="record.nickname != null">
         nickName = #{record.nickname,jdbcType=VARCHAR},
       </if>
@@ -219,7 +208,7 @@
         gmt_modified = #{record.gmtModified,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=TINYINT},
+        status = #{record.status,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -231,13 +220,12 @@
     set uid = #{record.uid,jdbcType=CHAR},
       ubalance = #{record.ubalance,jdbcType=DOUBLE},
       ugrade = #{record.ugrade,jdbcType=INTEGER},
-      token = #{record.token,jdbcType=CHAR},
       nickName = #{record.nickname,jdbcType=VARCHAR},
       avatarUrl = #{record.avatarurl,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=TINYINT},
       gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       gmt_modified = #{record.gmtModified,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=TINYINT}
+      status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -250,9 +238,6 @@
       </if>
       <if test="ugrade != null">
         ugrade = #{ugrade,jdbcType=INTEGER},
-      </if>
-      <if test="token != null">
-        token = #{token,jdbcType=CHAR},
       </if>
       <if test="nickname != null">
         nickName = #{nickname,jdbcType=VARCHAR},
@@ -270,7 +255,7 @@
         gmt_modified = #{gmtModified,jdbcType=BIGINT},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=INTEGER},
       </if>
     </set>
     where uid = #{uid,jdbcType=CHAR}
@@ -279,24 +264,14 @@
     update user
     set ubalance = #{ubalance,jdbcType=DOUBLE},
       ugrade = #{ugrade,jdbcType=INTEGER},
-      token = #{token,jdbcType=CHAR},
       nickName = #{nickname,jdbcType=VARCHAR},
       avatarUrl = #{avatarurl,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=TINYINT},
       gmt_create = #{gmtCreate,jdbcType=BIGINT},
       gmt_modified = #{gmtModified,jdbcType=BIGINT},
-      status = #{status,jdbcType=TINYINT}
+      status = #{status,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=CHAR}
   </update>
-
-  <!--更新余额，减操作-->
-  <update id="updateByPrimaryKeyForBalance" parameterType="map">
-    update user
-    set ubalance = ubalance - #{rebalance,jdbcType=DOUBLE}
-    where uid = #{userid,jdbcType=CHAR}
-  </update>
-
-
   <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -311,4 +286,10 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!--更新余额，减操作-->
+  <update id="updateByPrimaryKeyForBalance" parameterType="map">
+    update user
+    set ubalance = ubalance - #{rebalance,jdbcType=DOUBLE}
+    where uid = #{userid,jdbcType=CHAR}
+  </update>
 </mapper>

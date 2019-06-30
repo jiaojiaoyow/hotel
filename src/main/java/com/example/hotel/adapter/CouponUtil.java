@@ -16,7 +16,7 @@ public class CouponUtil {
 
     //将已经过期的优惠卷删除
     public List<Coupon> FilterTime(List<Coupon> datas) throws ParseException{
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH");
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         Date temp=null;
         //时间转换
         for (int i=0;i<datas.size();i++) {
@@ -26,7 +26,7 @@ public class CouponUtil {
             if(temp.getTime()<new Date().getTime()){
                 couponService.deleteByPrimaryKey(data.getCid());
                 datas.remove(data);
-                System.out.println("asd");
+                i=i-1;
             }
         }
         return datas;

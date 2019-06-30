@@ -6,7 +6,7 @@
     <result column="uid" jdbcType="CHAR" property="uid" />
     <result column="tiile" jdbcType="VARCHAR" property="tiile" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
-    <result column="imageUrl" jdbcType="VARCHAR" property="imageurl" />
+    <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.hotel.model.Essay">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    aid, uid, tiile, create_time, imageUrl
+    aid, uid, tiile, create_time, imageurl
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -125,7 +125,7 @@
   </delete>
   <insert id="insert" parameterType="com.example.hotel.model.Essay">
     insert into essay (aid, uid, tiile, 
-      create_time, imageUrl, content
+      create_time, imageurl, content
       )
     values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{tiile,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=DATE}, #{imageurl,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
@@ -147,7 +147,7 @@
         create_time,
       </if>
       <if test="imageurl != null">
-        imageUrl,
+        imageurl,
       </if>
       <if test="content != null">
         content,
@@ -196,7 +196,7 @@
         create_time = #{record.createTime,jdbcType=DATE},
       </if>
       <if test="record.imageurl != null">
-        imageUrl = #{record.imageurl,jdbcType=VARCHAR},
+        imageurl = #{record.imageurl,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -212,7 +212,7 @@
       uid = #{record.uid,jdbcType=CHAR},
       tiile = #{record.tiile,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=DATE},
-      imageUrl = #{record.imageurl,jdbcType=VARCHAR},
+      imageurl = #{record.imageurl,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,7 +224,7 @@
       uid = #{record.uid,jdbcType=CHAR},
       tiile = #{record.tiile,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=DATE},
-      imageUrl = #{record.imageurl,jdbcType=VARCHAR}
+      imageurl = #{record.imageurl,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -242,7 +242,7 @@
         create_time = #{createTime,jdbcType=DATE},
       </if>
       <if test="imageurl != null">
-        imageUrl = #{imageurl,jdbcType=VARCHAR},
+        imageurl = #{imageurl,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
@@ -255,7 +255,7 @@
     set uid = #{uid,jdbcType=CHAR},
       tiile = #{tiile,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
-      imageUrl = #{imageurl,jdbcType=VARCHAR},
+      imageurl = #{imageurl,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
@@ -264,7 +264,7 @@
     set uid = #{uid,jdbcType=CHAR},
       tiile = #{tiile,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
-      imageUrl = #{imageurl,jdbcType=VARCHAR}
+      imageurl = #{imageurl,jdbcType=VARCHAR}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
   <select id="selectByExampleWithBLOBsWithRowbounds" parameterType="com.example.hotel.model.EssayExample" resultMap="ResultMapWithBLOBs">
@@ -297,9 +297,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <!--自己加的-->
-  <select id="selectAll"
-          resultType="com.example.hotel.model.Essay">
-       select * from essay
+
+  <!--自己添加的-->
+  <select id="selectAll" resultType="com.example.hotel.model.Essay">
+    select * from essay
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from essay
+  </select>
+
+  <select id="selectPage" resultType="com.example.hotel.model.Essay" parameterType="java.util.Map">
+    select * from essay limit #{begin},#{num}
   </select>
 </mapper>

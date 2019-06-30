@@ -7,8 +7,6 @@ public class User {
 
     private Integer ugrade;
 
-    private String token;
-
     private String nickname;
 
     private String avatarurl;
@@ -19,7 +17,7 @@ public class User {
 
     private Long gmtModified;
 
-    private Byte status;
+    private Integer status;
 
     public String getUid() {
         return uid;
@@ -43,14 +41,6 @@ public class User {
 
     public void setUgrade(Integer ugrade) {
         this.ugrade = ugrade;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token == null ? null : token.trim();
     }
 
     public String getNickname() {
@@ -93,11 +83,11 @@ public class User {
         this.gmtModified = gmtModified;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

@@ -1,25 +1,10 @@
 package com.example.hotel.DTO;
 
 public class CouponDTO {
-    String uid;
-    int cid;
     String cname;
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public int getCid() {
-        return cid;
-    }
-
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
+    int date;
+    Double minAmount;
+    Double Amount;
 
     public String getCname() {
         return cname;
@@ -27,5 +12,29 @@ public class CouponDTO {
 
     public void setCname(String cname) {
         this.cname = cname;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public Double getMinAmount() {
+        return minAmount;
+    }
+
+    public void setMinAmount(Double minAmount) {
+        this.minAmount = minAmount;
+    }
+
+    public Double getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(Double amount) {
+        Amount = amount;
     }
 }

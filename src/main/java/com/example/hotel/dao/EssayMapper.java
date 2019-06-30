@@ -3,6 +3,8 @@ package com.example.hotel.dao;
 import com.example.hotel.model.Essay;
 import com.example.hotel.model.EssayExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -40,4 +42,8 @@ public interface EssayMapper {
     int updateByPrimaryKey(Essay record);
 
     List<Essay> selectAll();
+
+    int selectCount();
+
+    List<Essay> selectPage(Map map);
 }

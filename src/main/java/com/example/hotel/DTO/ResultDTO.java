@@ -43,26 +43,27 @@ public class ResultDTO {
         resultDTO.setStatus(200);
         resultDTO.setData(data);
         resultDTO.setMessage("请求成功");
-        try{
-            return resultDTO;
-        }catch (Exception e){
+        return resultDTO;
+    }
 
-        }
-        System.out.println();
+    public static ResultDTO fail() {
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setStatus(201);
+        resultDTO.setMessage("请求成功，但是没有数据");
         return resultDTO;
     }
 
     public static ResultDTO fail(String message) {
         ResultDTO resultDTO = new ResultDTO();
-        resultDTO.setStatus(400);
-        resultDTO.setMessage(message);
+        resultDTO.setStatus(204);
+        resultDTO.setMessage("请求失败，数据库操作失误"+message);
         return resultDTO;
     }
 
-    public static ResultDTO fail(IErrorCode errorCode) {
+    public static ResultDTO unkonwFail(String message) {
         ResultDTO resultDTO = new ResultDTO();
-        resultDTO.setStatus(errorCode.getCode());
-        resultDTO.setMessage(errorCode.getMessage());
+        resultDTO.setStatus(202);
+        resultDTO.setMessage("请求失败，因为："+message);
         return resultDTO;
     }
 

@@ -393,72 +393,72 @@ public class EssayExample {
         }
 
         public Criteria andImageurlIsNull() {
-            addCriterion("imageUrl is null");
+            addCriterion("imageurl is null");
             return (Criteria) this;
         }
 
         public Criteria andImageurlIsNotNull() {
-            addCriterion("imageUrl is not null");
+            addCriterion("imageurl is not null");
             return (Criteria) this;
         }
 
         public Criteria andImageurlEqualTo(String value) {
-            addCriterion("imageUrl =", value, "imageurl");
+            addCriterion("imageurl =", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlNotEqualTo(String value) {
-            addCriterion("imageUrl <>", value, "imageurl");
+            addCriterion("imageurl <>", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlGreaterThan(String value) {
-            addCriterion("imageUrl >", value, "imageurl");
+            addCriterion("imageurl >", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlGreaterThanOrEqualTo(String value) {
-            addCriterion("imageUrl >=", value, "imageurl");
+            addCriterion("imageurl >=", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlLessThan(String value) {
-            addCriterion("imageUrl <", value, "imageurl");
+            addCriterion("imageurl <", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlLessThanOrEqualTo(String value) {
-            addCriterion("imageUrl <=", value, "imageurl");
+            addCriterion("imageurl <=", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlLike(String value) {
-            addCriterion("imageUrl like", value, "imageurl");
+            addCriterion("imageurl like", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlNotLike(String value) {
-            addCriterion("imageUrl not like", value, "imageurl");
+            addCriterion("imageurl not like", value, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlIn(List<String> values) {
-            addCriterion("imageUrl in", values, "imageurl");
+            addCriterion("imageurl in", values, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlNotIn(List<String> values) {
-            addCriterion("imageUrl not in", values, "imageurl");
+            addCriterion("imageurl not in", values, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlBetween(String value1, String value2) {
-            addCriterion("imageUrl between", value1, value2, "imageurl");
+            addCriterion("imageurl between", value1, value2, "imageurl");
             return (Criteria) this;
         }
 
         public Criteria andImageurlNotBetween(String value1, String value2) {
-            addCriterion("imageUrl not between", value1, value2, "imageurl");
+            addCriterion("imageurl not between", value1, value2, "imageurl");
             return (Criteria) this;
         }
     }

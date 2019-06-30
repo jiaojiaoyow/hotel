@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.hotel.dao.EssayMapper;
 import java.util.List;
+import java.util.Map;
 
 @Service("EssayService")
 public class EssayServiceImpl implements EssayService {
@@ -99,4 +100,16 @@ public class EssayServiceImpl implements EssayService {
     public List<Essay> selectAll() {
         return esseyMapper.selectAll();
     }
+
+    @Override
+    public int selectCount() {
+        return this.esseyMapper.selectCount();
+    }
+
+    @Override
+    public List<Essay> selectPage(Map map) {
+        return this.esseyMapper.selectPage(map);
+    }
+
+
 }
