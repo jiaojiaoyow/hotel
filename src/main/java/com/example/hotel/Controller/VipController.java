@@ -34,7 +34,6 @@ public class VipController {
             if(flag==0){
                 return resultDTO.fail("数据库插入失败");
             }
-
             //更改用户表
             User user=userService.selectByPrimaryKey(vipDTO.getUid());
             user.setStatus(1);

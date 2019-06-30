@@ -32,8 +32,8 @@
 //        // 获取请求的URL
 //        String url = request.getRequestURI();
 //        // URL:除了login.jsp是可以公开访问的，其它的URL都进行拦截控制
-//        if(url.indexOf("/register")>=0 || url.indexOf("/toregister")>=0 || url.indexOf("/login")>=0 || url.indexOf("/tohome")>=0 || url.indexOf("/tologin")>=0||url.indexOf("/activation.do")>=0){
-//            return true;
+//        if(url.indexOf("/api/back/")>=0 ||  url.indexOf("/api/back/login")<0){
+//            return false;
 //        }
 //        // 获取Session
 //        HttpSession session = request.getSession();

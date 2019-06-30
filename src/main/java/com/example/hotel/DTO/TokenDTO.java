@@ -7,13 +7,25 @@ import lombok.Data;
  */
 @Data
 public class TokenDTO {
-    private String token;
+    private String tokenid;
 
-    public String getToken() {
-        return token;
+    private String openid;
+
+    public String getTokenid() {
+        return tokenid;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setTokenid(String tokenid) {
+        this.tokenid = tokenid;
     }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+
 }

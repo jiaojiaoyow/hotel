@@ -2,6 +2,7 @@ package com.example.hotel.Controller;
 
 import com.example.hotel.DTO.CouponDTO;
 import com.example.hotel.DTO.ResultDTO;
+import com.example.hotel.DTO.TokenDTO;
 import com.example.hotel.model.Coupon;
 import com.example.hotel.model.GetCoupon;
 import com.example.hotel.service.CouponService;
@@ -17,6 +18,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class CouponController {
@@ -86,7 +88,7 @@ public class CouponController {
             //设置开始和结束时间
             getCoupon.setUseStartDate(DateUtil.change_str(nowtime));
             getCoupon.setUseEndDate(DateUtil.addtime(nowtime,5));//有五天的时间
-            int flag=getCouponService.insert(getCoupon);
+            int flag=getCouponService.insertSelective(getCoupon);
             if(flag==0){
                 return resultDTO.fail("数据库插入失败");
             }
@@ -99,7 +101,7 @@ public class CouponController {
     }
 
     //新建优惠卷
-    @RequestMapping("/putCoupon")
+    @RequestMapping("/api/back/putCoupon")
     public ResultDTO putCoupon(CouponDTO couponDTO){
         ResultDTO resultDTO=new ResultDTO();
         try {

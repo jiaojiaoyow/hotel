@@ -302,4 +302,12 @@
   <select id="selectAll" resultType="com.example.hotel.model.Essay">
     select * from essay
   </select>
+
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from essay
+  </select>
+
+  <select id="selectPage" resultType="com.example.hotel.model.Essay" parameterType="java.util.Map">
+    select * from essay limit #{begin},#{num}
+  </select>
 </mapper>

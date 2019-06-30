@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 /**
  * 不要在意get和set方法的
@@ -41,6 +43,11 @@ public class LoginController {
             UserDTO user1=JSON.parseObject(loginDTO.getRawData(),UserDTO.class);
             user.setUid(sessionDTO.getOpenid());
             userService.saveOrUpdate(user);
+            //设置token
+//            if(token.getOpenid()==null) {
+//                token.setOpenid(sessionDTO.getOpenid());
+//                token.setTokenid(UUID.randomUUID().toString());
+//            }
             if (user==null){
                 return resultDTO.fail();
             }

@@ -39,7 +39,6 @@ public class CreateOrderController {
             //if(gc.getUseEndDate())
             if (coupon != null ) {
                 Double amount = coupon.getAmount();
-
                 return amount;
             }
         }

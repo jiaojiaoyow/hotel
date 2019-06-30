@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EssayService {
     long countByExample(EssayExample example);
@@ -41,5 +42,11 @@ public interface EssayService {
     int updateByPrimaryKey(Essay record);
 
     List<Essay> selectAll();
+
+
+//    自己写的
+    int selectCount();
+
+    List<Essay> selectPage(Map map);
 
 }

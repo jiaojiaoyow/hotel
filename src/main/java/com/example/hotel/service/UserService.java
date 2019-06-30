@@ -13,5 +13,7 @@ public interface UserService {
 
     User selectByPrimaryKey(String uid);
 
+    public int updateByPrimaryKeyForBalance(String userid, Double rebalance);
+
 
 }

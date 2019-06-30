@@ -21,15 +21,12 @@ public class CompanyController {
                 return resultDTO.fail();
             }
             return resultDTO.ok(company);
-
         }catch (Exception e){
             return resultDTO.unkonwFail(e.toString());
         }
-
-
     }
 
-    @RequestMapping("/editCompany")
+    @RequestMapping("/api/back/editCompany")
     public ResultDTO editCompany(Company company){
 
         ResultDTO resultDTO=new ResultDTO();
@@ -42,8 +39,5 @@ public class CompanyController {
         }catch (Exception e){
             return resultDTO.unkonwFail(e.toString());
         }
-
     }
-
-
 }
