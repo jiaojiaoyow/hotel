@@ -4,6 +4,7 @@ import com.example.hotel.DTO.ResultDTO;
 import com.example.hotel.model.Company;
 import com.example.hotel.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,12 +27,15 @@ public class CompanyController {
         }
     }
 
+    //保存或者更新 get方式
     @RequestMapping("/api/back/editCompany")
     public ResultDTO editCompany(Company company){
-
         ResultDTO resultDTO=new ResultDTO();
         try {
-            int flag=companyService.insertSelective(company);
+            if(company.getCname()==null){
+                return resultDTO.nothing();
+            }
+            int flag=companyService.saveOrUpdate(company);
             if(flag==0){
                 return resultDTO.fail("插入失败");
             }

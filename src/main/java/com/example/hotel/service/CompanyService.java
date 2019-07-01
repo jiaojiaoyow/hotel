@@ -25,4 +25,6 @@ public interface CompanyService {
     int updateByExample(@Param("record") Company record, @Param("example") CompanyExample example);
 
     Company selectAll();
+
+    public int saveOrUpdate(Company company);
 }

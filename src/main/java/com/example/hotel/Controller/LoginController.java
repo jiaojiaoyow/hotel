@@ -43,11 +43,6 @@ public class LoginController {
             UserDTO user1=JSON.parseObject(loginDTO.getRawData(),UserDTO.class);
             user.setUid(sessionDTO.getOpenid());
             userService.saveOrUpdate(user);
-            //设置token
-//            if(token.getOpenid()==null) {
-//                token.setOpenid(sessionDTO.getOpenid());
-//                token.setTokenid(UUID.randomUUID().toString());
-//            }
             if (user==null){
                 return resultDTO.fail();
             }
@@ -58,7 +53,6 @@ public class LoginController {
             return null;
         }
     }
-
 
 
 }

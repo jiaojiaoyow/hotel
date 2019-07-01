@@ -1,7 +1,5 @@
 package com.example.hotel.model;
 
-import java.util.Date;
-
 public class Essay {
     private Integer aid;
 
@@ -9,7 +7,7 @@ public class Essay {
 
     private String tiile;
 
-    private Date createTime;
+    private String createTime;
 
     private String imageurl;
 
@@ -39,12 +37,12 @@ public class Essay {
         this.tiile = tiile == null ? null : tiile.trim();
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime == null ? null : createTime.trim();
     }
 
     public String getImageurl() {

@@ -286,6 +286,7 @@
       order by ${orderByClause}
     </if>
   </select>
+
   <!--更新余额，减操作-->
   <update id="updateByPrimaryKeyForBalance" parameterType="map">
     update user

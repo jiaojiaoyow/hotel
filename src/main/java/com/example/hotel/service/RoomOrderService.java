@@ -34,6 +34,8 @@ public interface RoomOrderService {
 
     int updateByPrimaryKey(RoomOrder record);
 
+    //自己添加的
+
     List <RoomOrder> selectByUserid(String uid);
 
     int selectByRDU(RoomOrder record);

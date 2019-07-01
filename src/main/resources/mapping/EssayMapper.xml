@@ -5,7 +5,7 @@
     <id column="aid" jdbcType="INTEGER" property="aid" />
     <result column="uid" jdbcType="CHAR" property="uid" />
     <result column="tiile" jdbcType="VARCHAR" property="tiile" />
-    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.hotel.model.Essay">
@@ -128,7 +128,7 @@
       create_time, imageurl, content
       )
     values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{tiile,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=DATE}, #{imageurl,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      #{createTime,jdbcType=VARCHAR}, #{imageurl,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.hotel.model.Essay">
@@ -164,7 +164,7 @@
         #{tiile,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=DATE},
+        #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="imageurl != null">
         #{imageurl,jdbcType=VARCHAR},
@@ -193,7 +193,7 @@
         tiile = #{record.tiile,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=DATE},
+        create_time = #{record.createTime,jdbcType=VARCHAR},
       </if>
       <if test="record.imageurl != null">
         imageurl = #{record.imageurl,jdbcType=VARCHAR},
@@ -211,7 +211,7 @@
     set aid = #{record.aid,jdbcType=INTEGER},
       uid = #{record.uid,jdbcType=CHAR},
       tiile = #{record.tiile,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=DATE},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
       imageurl = #{record.imageurl,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -223,7 +223,7 @@
     set aid = #{record.aid,jdbcType=INTEGER},
       uid = #{record.uid,jdbcType=CHAR},
       tiile = #{record.tiile,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=DATE},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
       imageurl = #{record.imageurl,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -239,7 +239,7 @@
         tiile = #{tiile,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=DATE},
+        create_time = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="imageurl != null">
         imageurl = #{imageurl,jdbcType=VARCHAR},
@@ -254,7 +254,7 @@
     update essay
     set uid = #{uid,jdbcType=CHAR},
       tiile = #{tiile,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=VARCHAR},
       imageurl = #{imageurl,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where aid = #{aid,jdbcType=INTEGER}
@@ -263,7 +263,7 @@
     update essay
     set uid = #{uid,jdbcType=CHAR},
       tiile = #{tiile,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=VARCHAR},
       imageurl = #{imageurl,jdbcType=VARCHAR}
     where aid = #{aid,jdbcType=INTEGER}
   </update>

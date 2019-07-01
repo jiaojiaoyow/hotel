@@ -64,10 +64,7 @@ public class GetCouponServiceImpl implements GetCouponService {
         return 0;
     }
 
-    @Override
-    public int updateByPrimaryKeySelective(GetCoupon record) {
-        return 0;
-    }
+
 
     @Override
     public int updateByPrimaryKey(GetCoupon record) {
@@ -89,6 +86,11 @@ public class GetCouponServiceImpl implements GetCouponService {
     @Override
     public GetCoupon selectByPrimaryKey(GetCouponKey key) {
         return this.getCouponMapper.selectByPrimaryKey(key);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(GetCoupon record) {
+        return this.getCouponMapper.updateByPrimaryKeySelective(record);
     }
 
 

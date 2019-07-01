@@ -5,6 +5,7 @@ import com.example.hotel.model.User;
 import com.example.hotel.model.UserExample;
 import com.example.hotel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
         example.createCriteria().andUidEqualTo(user.getUid());
         try {
             List<User> users = userMapper.selectByExample(example);
+
             // 先查看是否有，如果有更新，没有创建
             if (users != null && users.size() != 0) {
                 user.setGmtModified(System.currentTimeMillis());
@@ -31,8 +33,6 @@ public class UserServiceImpl implements UserService {
         }catch (Exception e){
             System.out.println(e);
         }
-
-
     }
 
     @Override
@@ -44,5 +44,8 @@ public class UserServiceImpl implements UserService {
     public int updateByPrimaryKeyForBalance(String userid, Double rebalance) {
         return userMapper.updateByPrimaryKeyForBalance(userid,rebalance);
     }
+
+
+
 
 }

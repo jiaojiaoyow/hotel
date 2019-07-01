@@ -35,7 +35,6 @@ public interface CouponService {
 
     int updateByPrimaryKey(Coupon record);
 
-
     List<Coupon> SelectAll();
 }
 

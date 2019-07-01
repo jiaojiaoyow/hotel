@@ -196,4 +196,6 @@
   <select id="selectByUname" resultType="com.example.hotel.model.Admin" parameterType="java.lang.String">
     SELECT * from admin where uname=#{uname}
   </select>
+
+
 </mapper>
