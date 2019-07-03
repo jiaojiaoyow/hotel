@@ -50,7 +50,15 @@ public interface RoomOrderMapper {
 
     RoomOrder selectByOrderid(int orderid);
 
+
     int selectCount();
 
     List<RoomOrder> selectPage(Map map);
+
+    List<RoomOrder> selectAllCompleteOrder();
+
+    List<RoomOrder> selectAllOrder();
+
+    List<RoomOrder> selectAllPayOrder();
+
 }

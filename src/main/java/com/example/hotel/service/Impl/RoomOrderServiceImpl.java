@@ -93,6 +93,7 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     }
 
     @Override
+
     public int selectCount() {
         return this.roomOrderMapper.selectCount();
     }
@@ -105,5 +106,19 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     @Override
     public int updateByPrimaryKeySelective(RoomOrder record) {
         return this.roomOrderMapper.updateByPrimaryKeySelective(record);
+
+    public List<RoomOrder> selectAllCompleteOrder() {
+        return roomOrderMapper.selectAllCompleteOrder();
+    }
+
+    @Override
+    public List<RoomOrder> selectAllOrder() {
+        return roomOrderMapper.selectAllOrder();
+    }
+
+    @Override
+    public List<RoomOrder> selectAllPayOrder() {
+        return roomOrderMapper.selectAllPayOrder();
+
     }
 }

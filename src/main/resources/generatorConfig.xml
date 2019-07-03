@@ -46,6 +46,14 @@
         </table>
 
         <table tableName="goodsorder" domainObjectName="GoodsOrder">
+
+
+
+        <table tableName="troroom" domainObjectName="Troroom">
+
+        <table tableName="company" domainObjectName="Company">
+
+
             <property name="useActualColumnNames" value="false"/>
         </table>
 
