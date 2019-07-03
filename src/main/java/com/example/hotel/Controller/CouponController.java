@@ -94,15 +94,17 @@ public class CouponController {
             }
             return resultDTO.ok(null);
 
+        } catch (org.springframework.dao.DuplicateKeyException e){
+            return resultDTO.interFail("优惠卷");
         }catch (Exception e){
             return resultDTO.unkonwFail(e.toString());
         }
 
     }
 
-    //新建优惠卷
+    //新建优惠卷 get方式
     @RequestMapping("/api/back/putCoupon")
-    public ResultDTO putCoupon(CouponDTO couponDTO){
+    public ResultDTO putCoupon(@RequestBody CouponDTO couponDTO){
         ResultDTO resultDTO=new ResultDTO();
         try {
             Date nowtime=new Date();
@@ -110,17 +112,54 @@ public class CouponController {
             coupon.setAmount(couponDTO.getAmount());
             coupon.setCname(couponDTO.getCname());
             coupon.setMinAmount(couponDTO.getMinAmount());
+            coupon.setSendStartDate(DateUtil.change_str(nowtime));
             coupon.setSendEndDate(DateUtil.addtime(nowtime,couponDTO.getDate()));
-
             int flag=couponService.insertSelective(coupon);
             if(flag==0){
                 return resultDTO.fail("数据库插入失败");
             }
             return resultDTO.ok(null);
 
+        }catch (org.springframework.dao.DuplicateKeyException e){
+            return resultDTO.interFail("优惠卷");
         }catch (Exception e){
             return resultDTO.unkonwFail(e.toString());
         }
+    }
 
+    //修改优惠卷  Get方式
+    @RequestMapping("/api/back/alterCoupon")
+    public ResultDTO alterCoupon(Coupon coupon){
+        ResultDTO resultDTO=new ResultDTO();
+        try {
+            if(coupon.getCid()==null){
+                return resultDTO.nothing();
+            }
+            int flag=couponService.updateByPrimaryKeySelective(coupon);
+            if(flag==0){
+                return resultDTO.fail("数据库更新失败");
+            }
+            return resultDTO.ok(null);
+
+        }catch (Exception e){
+            return resultDTO.unkonwFail(e.toString());
+        }
+    }
+
+    @RequestMapping("/api/back/deleteCoupon")
+    public ResultDTO deleteCoupon(Integer cid){
+        ResultDTO resultDTO=new ResultDTO();
+        try {
+            if(cid==null){
+                return resultDTO.nothing();
+            }
+            int flag=couponService.deleteByPrimaryKey(cid);
+            if(flag==0){
+                return resultDTO.fail("优惠卷删除失败");
+            }
+            return resultDTO.ok(null);
+        }catch (Exception e){
+            return resultDTO.unkonwFail(e.toString());
+        }
     }
 }

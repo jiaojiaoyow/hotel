@@ -2,6 +2,7 @@ package com.example.hotel.service;
 
 import com.example.hotel.model.Admin;
 import com.example.hotel.model.AdminExample;
+import com.example.hotel.model.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -33,4 +34,7 @@ public interface AdminService {
     int updateByPrimaryKey(Admin record);
 
     Admin selectByUname(String uname);
+
+    //自己加的
+    public int saveOrUpdate(Admin admin);
 }

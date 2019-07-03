@@ -27,19 +27,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int deleteByPrimaryKey(Integer adminId) {
-        return 0;
-    }
-
-    @Override
     public int insert(Admin record) {
         return 0;
     }
 
-    @Override
-    public int insertSelective(Admin record) {
-        return 0;
-    }
+
 
     @Override
     public List<Admin> selectByExampleWithRowbounds(AdminExample example, RowBounds rowBounds) {
@@ -56,10 +48,6 @@ public class AdminServiceImpl implements AdminService {
         return null;
     }
 
-    @Override
-    public int updateByExampleSelective(Admin record, AdminExample example) {
-        return 0;
-    }
 
     @Override
     public int updateByExample(Admin record, AdminExample example) {
@@ -76,9 +64,47 @@ public class AdminServiceImpl implements AdminService {
         return 0;
     }
 
+
+    //自己添加的
+
     @Override
     public Admin selectByUname(String uname) {
         return this.adminMapper.selectByUname(uname);
+    }
+
+    @Override
+    public int updateByExampleSelective(Admin record, AdminExample example) {
+        return this.adminMapper.updateByExampleSelective(record,example);
+    }
+
+    @Override
+    public int insertSelective(Admin record) {
+        return this.adminMapper.insertSelective(record);
+    }
+
+    @Override
+    public int saveOrUpdate(Admin admin) {
+        AdminExample example=new AdminExample();
+        example.createCriteria().andUnameEqualTo(admin.getUname());
+        int flag=0;
+        try {
+            List<Admin> users = adminMapper.selectByExample(example);
+            // 先查看是否有，如果有更新，没有创建
+            if (users != null && users.size() != 0) {
+                flag=adminMapper.updateByExampleSelective(admin, example);
+            } else {
+                flag=adminMapper.insertSelective(admin);
+            }
+            return flag;
+        }catch (Exception e){
+            System.out.println(e);
+            return flag;
+        }
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer adminId) {
+        return this.adminMapper.deleteByPrimaryKey(adminId);
     }
 
 }

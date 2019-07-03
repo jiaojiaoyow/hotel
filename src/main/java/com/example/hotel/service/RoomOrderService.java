@@ -1,5 +1,6 @@
 package com.example.hotel.service;
 
+import com.example.hotel.model.Essay;
 import com.example.hotel.model.RoomOrder;
 import com.example.hotel.model.RoomOrderExample;
 import com.example.hotel.model.RoomOrderKey;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RoomOrderService {
 
@@ -34,15 +36,23 @@ public interface RoomOrderService {
 
     int updateByPrimaryKey(RoomOrder record);
 
+    //自己添加的
+
     List <RoomOrder> selectByUserid(String uid);
 
     int selectByRDU(RoomOrder record);
 
     RoomOrder selectByOrderid(int orderid);
 
+
+    int selectCount();
+
+    List<RoomOrder> selectPage(Map map);
+
     List<RoomOrder> selectAllCompleteOrder();
 
     List<RoomOrder> selectAllOrder();
 
     List<RoomOrder> selectAllPayOrder();
+
 }

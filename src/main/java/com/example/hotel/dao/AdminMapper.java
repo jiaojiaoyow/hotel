@@ -32,4 +32,6 @@ public interface AdminMapper {
     int updateByPrimaryKey(Admin record);
 
     Admin selectByUname(String uname);
+
+    public void saveOrUpdate(Admin admin);
 }

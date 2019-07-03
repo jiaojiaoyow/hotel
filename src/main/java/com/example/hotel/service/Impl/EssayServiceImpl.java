@@ -26,20 +26,14 @@ public class EssayServiceImpl implements EssayService {
         return 0;
     }
 
-    @Override
-    public int deleteByPrimaryKey(Integer aid) {
-        return 0;
-    }
+
 
     @Override
     public int insert(Essay record) {
         return 0;
     }
 
-    @Override
-    public int insertSelective(Essay record) {
-        return 0;
-    }
+
 
     @Override
     public List<Essay> selectByExampleWithBLOBsWithRowbounds(EssayExample example, RowBounds rowBounds) {
@@ -81,10 +75,7 @@ public class EssayServiceImpl implements EssayService {
         return 0;
     }
 
-    @Override
-    public int updateByPrimaryKeySelective(Essay record) {
-        return 0;
-    }
+
 
     @Override
     public int updateByPrimaryKeyWithBLOBs(Essay record) {
@@ -109,6 +100,22 @@ public class EssayServiceImpl implements EssayService {
     @Override
     public List<Essay> selectPage(Map map) {
         return this.esseyMapper.selectPage(map);
+    }
+
+    //自己更新的
+    @Override
+    public int updateByPrimaryKeySelective(Essay record) {
+        return this.esseyMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer aid) {
+        return this.esseyMapper.deleteByPrimaryKey(aid);
+    }
+
+    @Override
+    public int insertSelective(Essay record) {
+        return this.esseyMapper.insertSelective(record);
     }
 
 
