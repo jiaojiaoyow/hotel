@@ -37,5 +37,7 @@ public interface RoomMapper {
 
     int updateByPrimaryKeyForReduce(@Param("rname") String rname,@Param("roomnum") int roomnum);
 
+    int selectCount();
+
 
 }

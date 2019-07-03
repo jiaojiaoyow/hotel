@@ -20,12 +20,16 @@ import org.jdom2.Element;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.stream.events.DTD;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+
+
+import static com.example.hotel.util.DateUtil.*;
 
 
 @RestController
@@ -64,12 +68,12 @@ public class CreateOrderController {
     @RequestMapping("/api/createorder")
     public cOrderDTO createOrder(@RequestBody RoomOrder roomOrder,HttpServletRequest request){
 
-        try{
-            System.out.println("roomname: "+roomOrder.getUname());
-            System.out.println("uid: "+roomOrder.getUid());
+        try {
+            System.out.println("roomname: " + roomOrder.getUname());
+            System.out.println("uid: " + roomOrder.getUid());
             User user=userService.selectByPrimaryKey(roomOrder.getUid());
-        //HttpServletRequest request
-        if(roomOrder !=null && roomOrder.getUid()!=null && !roomOrder.equals("") &&user.getUid()!=null && !user.getUid().equals("")) {
+            //HttpServletRequest request
+            if(roomOrder !=null && roomOrder.getUid()!=null && !roomOrder.equals("") &&user.getUid()!=null && !user.getUid().equals("")) {
 
             String uid = roomOrder.getUid();                 //"1234";
             String roomname = roomOrder.getRoomname();       //"阳光大床房";
@@ -84,12 +88,15 @@ public class CreateOrderController {
             if (r != null) {
                 int num = r.getRoomnumber(); //剩余房间数
                 if (num > 0 && num - roomnumber >= 0) {
-                    double amount = getCoupon(roomOrder.getCid(),uid);
+                    double amount = getCoupon(roomOrder.getCid(), uid);
                     double price = r.getRoomprice() * roomnumber * days - amount; //总价，算优惠卷
-                    String s = DateToString();
+                    Date date=new Date();
+                    String s=change_str3(date);
                     ordertime += s.substring(10);
                     leavetime += s.substring(10);
                     RoomOrder order = new RoomOrder();
+
+                    order.setOrderid("100"+change_str2(date));
                     order.setUid(uid);
                     order.setRoomnumber(roomnumber);
                     order.setUname(username);
@@ -99,6 +106,7 @@ public class CreateOrderController {
                     order.setOrdertime(ordertime);
                     order.setLeavetime(leavetime);
                     order.setArrivetime(arrivetime);
+                    order.setOrderday(days);
 
                     int a = roomService.updateByPrimaryKeyForReduce(roomname, roomnumber);//更新房间数
                     if (a != 1) {
@@ -110,7 +118,7 @@ public class CreateOrderController {
                     rm.setOrdertime(ordertime);
                     rm.setRoomname(roomname);
                     rm.setUid(uid);
-                    int orderid = roomOrderService.selectByRDU(rm);//订单id
+                    String orderid = roomOrderService.selectByRDU(rm);//订单id
 
 
                     cOrderDTO cd = new cOrderDTO(uid, orderid, 1, 0.0);
@@ -127,7 +135,7 @@ public class CreateOrderController {
             System.out.println(e);
 
         }
-        System.out.println("数据为空");
+        System.out.println("数据为空或用户不存在");
             return null;
     }
 
@@ -387,7 +395,7 @@ public class CreateOrderController {
         }
         return result;
     }
-    /**
+    /*
      * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
      * @param params 需要排序并参与字符拼接的参数组
      * @return 拼接后字符串
@@ -494,7 +502,7 @@ public class CreateOrderController {
 
         return m;
     }
-    /**
+    /*
      * 获取子结点的xml
      * @param children
      * @return String

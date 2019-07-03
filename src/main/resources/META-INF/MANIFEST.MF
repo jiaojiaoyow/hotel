@@ -1,32 +1,33 @@
 Manifest-Version: 1.0
-Class-Path: thymeleaf-spring5-3.0.11.RELEASE.jar spring-jcl-5.1.7.RELE
- ASE.jar spring-boot-starter-2.1.5.RELEASE.jar spring-core-5.1.7.RELEA
- SE.jar spring-rabbit-2.1.6.RELEASE.jar mybatis-spring-boot-starter-2.
- 0.1.jar spring-boot-starter-tomcat-2.1.5.RELEASE.jar amqp-client-5.4.
- 3.jar okhttp-3.8.1.jar mybatis-spring-boot-autoconfigure-2.0.1.jar lo
- g4j-api-2.11.2.jar spring-retry-1.2.4.RELEASE.jar logback-core-1.2.3.
- jar spring-boot-starter-web-2.1.5.RELEASE.jar mysql-connector-java-8.
- 0.16.jar fastjson-1.2.33.jar mchange-commons-java-0.2.11.jar tomcat-e
- mbed-el-9.0.19.jar mybatis-3.5.1.jar commons-lang3-3.8.1.jar attopars
- er-2.0.5.RELEASE.jar hibernate-validator-6.0.16.Final.jar slf4j-api-1
- .7.26.jar validation-api-2.0.1.Final.jar log4j-to-slf4j-2.11.2.jar Hi
- kariCP-3.2.0.jar tomcat-embed-websocket-9.0.19.jar unbescape-1.1.6.RE
- LEASE.jar jackson-datatype-jdk8-2.9.8.jar spring-messaging-5.1.7.RELE
- ASE.jar c3p0-0.9.5.2.jar spring-beans-5.1.7.RELEASE.jar spring-expres
- sion-5.1.7.RELEASE.jar spring-jdbc-5.1.7.RELEASE.jar okio-1.13.0.jar 
- tomcat-embed-core-9.0.19.jar spring-boot-starter-amqp-2.1.5.RELEASE.j
- ar spring-boot-autoconfigure-2.1.5.RELEASE.jar mybatis-spring-2.0.1.j
- ar spring-context-5.1.7.RELEASE.jar jackson-annotations-2.9.0.jar spr
- ing-aop-5.1.7.RELEASE.jar commons-codec-1.11.jar snakeyaml-1.23.jar j
- ackson-core-2.9.8.jar jboss-logging-3.3.2.Final.jar spring-web-5.1.7.
- RELEASE.jar spring-boot-starter-logging-2.1.5.RELEASE.jar spring-boot
- -starter-thymeleaf-2.1.5.RELEASE.jar thymeleaf-3.0.11.RELEASE.jar lom
- bok-1.18.8.jar spring-boot-starter-json-2.1.5.RELEASE.jar javax.annot
- ation-api-1.3.2.jar spring-tx-5.1.7.RELEASE.jar jul-to-slf4j-1.7.26.j
- ar spring-boot-starter-jdbc-2.1.5.RELEASE.jar thymeleaf-extras-java8t
- ime-3.0.4.RELEASE.jar logback-classic-1.2.3.jar jackson-datatype-jsr3
- 10-2.9.8.jar spring-boot-2.1.5.RELEASE.jar classmate-1.4.0.jar spring
- -webmvc-5.1.7.RELEASE.jar jackson-databind-2.9.8.jar spring-amqp-2.1.
- 6.RELEASE.jar jackson-module-parameter-names-2.9.8.jar
+Class-Path: validation-api-2.0.1.Final.jar spring-tx-5.1.7.RELEASE.jar
+  log4j-to-slf4j-2.11.2.jar mybatis-spring-boot-autoconfigure-2.0.1.ja
+ r HikariCP-3.2.0.jar c3p0-0.9.5.2.jar jboss-logging-3.3.2.Final.jar s
+ pring-webmvc-5.1.7.RELEASE.jar mybatis-3.5.1.jar jackson-core-2.9.8.j
+ ar spring-boot-starter-tomcat-2.1.5.RELEASE.jar byte-buddy-1.9.12.jar
+  spring-boot-starter-thymeleaf-2.1.5.RELEASE.jar thymeleaf-3.0.11.REL
+ EASE.jar spring-retry-1.2.4.RELEASE.jar spring-expression-5.1.7.RELEA
+ SE.jar spring-rabbit-2.1.6.RELEASE.jar jul-to-slf4j-1.7.26.jar mybati
+ s-spring-boot-starter-2.0.1.jar amqp-client-5.4.3.jar commons-codec-1
+ .11.jar unbescape-1.1.6.RELEASE.jar spring-amqp-2.1.6.RELEASE.jar jac
+ kson-annotations-2.9.0.jar spring-beans-5.1.7.RELEASE.jar spring-boot
+ -2.1.5.RELEASE.jar thymeleaf-spring5-3.0.11.RELEASE.jar spring-boot-s
+ tarter-web-2.1.5.RELEASE.jar hibernate-validator-6.0.16.Final.jar spr
+ ing-jdbc-5.1.7.RELEASE.jar javax.annotation-api-1.3.2.jar log4j-api-2
+ .11.2.jar classmate-1.4.0.jar jackson-datatype-jsr310-2.9.8.jar fastj
+ son-1.2.33.jar spring-jcl-5.1.7.RELEASE.jar spring-boot-starter-jdbc-
+ 2.1.5.RELEASE.jar spring-web-5.1.7.RELEASE.jar spring-boot-autoconfig
+ ure-2.1.5.RELEASE.jar mybatis-spring-2.0.1.jar spring-boot-starter-lo
+ gging-2.1.5.RELEASE.jar spring-aop-5.1.7.RELEASE.jar jackson-datatype
+ -jdk8-2.9.8.jar logback-core-1.2.3.jar jackson-databind-2.9.8.jar tom
+ cat-embed-core-9.0.19.jar spring-boot-starter-2.1.5.RELEASE.jar snake
+ yaml-1.23.jar jdom2-2.0.6.jar logback-classic-1.2.3.jar lombok-1.18.8
+ .jar spring-context-5.1.7.RELEASE.jar jackson-module-parameter-names-
+ 2.9.8.jar thymeleaf-extras-java8time-3.0.4.RELEASE.jar tomcat-embed-e
+ l-9.0.19.jar tomcat-embed-websocket-9.0.19.jar spring-core-5.1.7.RELE
+ ASE.jar dom4j-1.1.jar spring-boot-starter-json-2.1.5.RELEASE.jar comm
+ ons-lang3-3.8.1.jar okio-1.13.0.jar spring-boot-starter-amqp-2.1.5.RE
+ LEASE.jar mchange-commons-java-0.2.11.jar attoparser-2.0.5.RELEASE.ja
+ r spring-messaging-5.1.7.RELEASE.jar slf4j-api-1.7.26.jar okhttp-3.8.
+ 1.jar mysql-connector-java-8.0.16.jar
 Main-Class: com.example.hotel.HotelApplication
 

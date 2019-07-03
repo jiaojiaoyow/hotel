@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hotel.dao.RoomOrderMapper">
   <resultMap id="BaseResultMap" type="com.example.hotel.model.RoomOrder">
-    <id column="orderid" jdbcType="INTEGER" property="orderid" />
+    <id column="orderid" jdbcType="VARCHAR" property="orderid" />
     <id column="uid" jdbcType="CHAR" property="uid" />
     <id column="roomname" jdbcType="VARCHAR" property="roomname" />
     <result column="uname" jdbcType="VARCHAR" property="uname" />
@@ -79,6 +79,7 @@
     totalprice, orderstatus, cid, arrivetime
   </sql>
 
+
   <!-- 通过uid查询所有订单-->
   <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -90,17 +91,17 @@
   </select>
 
   <!--通过订单id查询当前订单-->
-  <select id="selectByOrderid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByOrderid" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from roomorder
-    where orderid = #{orderid,jdbcType=INTEGER}
+    where orderid = #{orderid,jdbcType=VARCHAR}
 
   </select>
 
 
   <!--通过用户id，订单起始时间，房间名确认id-->
-  <select id="selectByRDU" parameterType="com.example.hotel.model.RoomOrder" resultType="java.lang.Integer">
+  <select id="selectByRDU" parameterType="com.example.hotel.model.RoomOrder" resultType="java.lang.String">
     select
      orderid
     from roomorder
@@ -120,18 +121,23 @@
   </select>
 
   <!--所有订单，包括失效完成-->
-  <select id="selectAllOrder"  resultMap="BaseResultMap">
+  <select id="selectAllOrder" parameterType="java.util.Map"  resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from roomorder
+    from roomorder limit #{begin},#{num}
   </select>
 
   <!--所有已经完成订单-->
-  <select id="selectAllCompleteOrder"  resultMap="BaseResultMap">
+  <select id="selectAllCompleteOrder"  parameterType="java.util.Map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from roomorder
-    where orderstatus = 4
+    where orderstatus = 4  limit #{begin},#{num}
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from roomorder
+    where  orderstatus = 4
   </select>
 
 
@@ -156,13 +162,13 @@
     select 
     <include refid="Base_Column_List" />
     from roomorder
-    where orderid = #{orderid,jdbcType=INTEGER}
+    where orderid = #{orderid,jdbcType=VARCHAR}
       and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.example.hotel.model.RoomOrderKey">
     delete from roomorder
-    where orderid = #{orderid,jdbcType=INTEGER}
+    where orderid = #{orderid,jdbcType=VARCHAR}
       and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </delete>
@@ -178,7 +184,7 @@
       ordertime, leavetime, orderday, 
       totalprice, orderstatus, cid, 
       arrivetime)
-    values (#{orderid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{roomname,jdbcType=VARCHAR}, 
+    values (#{orderid,jdbcType=VARCHAR}, #{uid,jdbcType=CHAR}, #{roomname,jdbcType=VARCHAR}, 
       #{uname,jdbcType=VARCHAR}, #{uphone,jdbcType=VARCHAR}, #{roomnumber,jdbcType=INTEGER}, 
       #{ordertime,jdbcType=TIMESTAMP}, #{leavetime,jdbcType=TIMESTAMP}, #{orderday,jdbcType=INTEGER}, 
       #{totalprice,jdbcType=DOUBLE}, #{orderstatus,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
@@ -229,7 +235,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
-        #{orderid,jdbcType=INTEGER},
+        #{orderid,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
         #{uid,jdbcType=CHAR},
@@ -279,7 +285,7 @@
     update roomorder
     <set>
       <if test="record.orderid != null">
-        orderid = #{record.orderid,jdbcType=INTEGER},
+        orderid = #{record.orderid,jdbcType=VARCHAR},
       </if>
       <if test="record.uid != null">
         uid = #{record.uid,jdbcType=CHAR},
@@ -324,7 +330,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update roomorder
-    set orderid = #{record.orderid,jdbcType=INTEGER},
+    set orderid = #{record.orderid,jdbcType=VARCHAR},
       uid = #{record.uid,jdbcType=CHAR},
       roomname = #{record.roomname,jdbcType=VARCHAR},
       uname = #{record.uname,jdbcType=VARCHAR},
@@ -375,7 +381,7 @@
         arrivetime = #{arrivetime,jdbcType=VARCHAR},
       </if>
     </set>
-    where orderid = #{orderid,jdbcType=INTEGER}
+    where orderid = #{orderid,jdbcType=VARCHAR}
       and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </update>
@@ -391,7 +397,7 @@
       orderstatus = #{orderstatus,jdbcType=INTEGER},
       cid = #{cid,jdbcType=INTEGER},
       arrivetime = #{arrivetime,jdbcType=VARCHAR}
-    where orderid = #{orderid,jdbcType=INTEGER}
+    where orderid = #{orderid,jdbcType=VARCHAR}
       and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </update>

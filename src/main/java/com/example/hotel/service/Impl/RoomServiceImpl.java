@@ -85,4 +85,9 @@ public class RoomServiceImpl implements RoomService {
     public int updateByPrimaryKeyForReduce(String rname, int roomnum) {
        return roomMapper.updateByPrimaryKeyForReduce(rname,roomnum);
     }
+
+    @Override
+    public int selectCount() {
+        return roomMapper.selectCount();
+    }
 }

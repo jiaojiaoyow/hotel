@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
+
 public interface TroRoomService {
     long countByExample(TroRoomExample example);
 
@@ -33,4 +34,7 @@ public interface TroRoomService {
     int updateByPrimaryKey(TroRoom record);
 
     List<TroRoom> selectAllTroRoom();
+
+    int selectCount();
+
 }

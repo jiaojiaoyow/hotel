@@ -1,18 +1,18 @@
 package com.example.hotel.model;
 
 public class RoomOrderKey {
-    private Integer orderid;
+    private String orderid;
 
     private String uid;
 
     private String roomname;
 
-    public Integer getOrderid() {
+    public String getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
+    public void setOrderid(String orderid) {
+        this.orderid = orderid == null ? null : orderid.trim();
     }
 
     public String getUid() {

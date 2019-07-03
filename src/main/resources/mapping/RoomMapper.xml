@@ -209,6 +209,10 @@
     where roomname = #{rname} and  roomnumber- #{roomnum}>=0
   </update>
 
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from room
+  </select>
+
   <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.RoomExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

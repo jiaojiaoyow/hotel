@@ -38,7 +38,7 @@ public class TroRoomServiceImpl implements TroRoomService {
 
     @Override
     public int insertSelective(TroRoom record) {
-        return 0;
+        return troRoomMapper.insertSelective(record);
     }
 
     @Override
@@ -79,5 +79,10 @@ public class TroRoomServiceImpl implements TroRoomService {
     @Override
     public List<TroRoom> selectAllTroRoom() {
         return troRoomMapper.selectAllTroRoom();
+    }
+
+    @Override
+    public int selectCount() {
+        return troRoomMapper.selectCount();
     }
 }

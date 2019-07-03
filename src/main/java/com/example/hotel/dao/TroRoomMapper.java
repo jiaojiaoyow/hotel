@@ -4,6 +4,8 @@ import com.example.hotel.model.TroRoom;
 import com.example.hotel.model.TroRoomExample;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -33,4 +35,7 @@ public interface TroRoomMapper {
     int updateByPrimaryKey(TroRoom record);
 
     List<TroRoom> selectAllTroRoom();
+
+    int selectCount();
+
 }

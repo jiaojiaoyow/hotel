@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.hotel.dao.TroroomMapper">
-  <resultMap id="BaseResultMap" type="com.example.hotel.model.Troroom">
+<mapper namespace="com.example.hotel.dao.TroRoomMapper">
+  <resultMap id="BaseResultMap" type="com.example.hotel.model.TroRoom">
     <id column="roomintroduce" jdbcType="VARCHAR" property="roomintroduce" />
     <result column="roomimage" jdbcType="VARCHAR" property="roomimage" />
     <result column="roomarea" jdbcType="VARCHAR" property="roomarea" />
@@ -79,7 +79,11 @@
     from troroom
   </select>
 
-  <select id="selectByExample" parameterType="com.example.hotel.model.TroroomExample" resultMap="BaseResultMap">
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from troroom
+  </select>
+
+  <select id="selectByExample" parameterType="com.example.hotel.model.TroRoomExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -103,13 +107,13 @@
     delete from troroom
     where roomintroduce = #{roomintroduce,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.hotel.model.TroroomExample">
+  <delete id="deleteByExample" parameterType="com.example.hotel.model.TroRoomExample">
     delete from troroom
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.hotel.model.Troroom">
+  <insert id="insert" parameterType="com.example.hotel.model.TroRoom">
     insert into troroom (roomintroduce, roomimage, roomarea, 
       roomwifi, roombed, roombreakfast, 
       roomnum, roomprice)
@@ -117,7 +121,7 @@
       #{roomwifi,jdbcType=VARCHAR}, #{roombed,jdbcType=VARCHAR}, #{roombreakfast,jdbcType=VARCHAR}, 
       #{roomnum,jdbcType=VARCHAR}, #{roomprice,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.hotel.model.Troroom">
+  <insert id="insertSelective" parameterType="com.example.hotel.model.TroRoom">
     insert into troroom
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roomintroduce != null">
@@ -172,7 +176,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.hotel.model.TroroomExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.example.hotel.model.TroRoomExample" resultType="java.lang.Long">
     select count(*) from troroom
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -224,7 +228,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.Troroom">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.TroRoom">
     update troroom
     <set>
       <if test="roomimage != null">
@@ -251,7 +255,7 @@
     </set>
     where roomintroduce = #{roomintroduce,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.Troroom">
+  <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.TroRoom">
     update troroom
     set roomimage = #{roomimage,jdbcType=VARCHAR},
       roomarea = #{roomarea,jdbcType=VARCHAR},
@@ -262,7 +266,7 @@
       roomprice = #{roomprice,jdbcType=DOUBLE}
     where roomintroduce = #{roomintroduce,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.TroroomExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.TroRoomExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("RoomOrderService")
 public class RoomOrderServiceImpl implements RoomOrderService {
@@ -83,27 +84,32 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     }
 
     @Override
-    public int selectByRDU(RoomOrder record) {
+    public String selectByRDU(RoomOrder record) {
         return roomOrderMapper.selectByRDU(record);
     }
 
     @Override
-    public RoomOrder selectByOrderid(int orderid) {
+    public RoomOrder selectByOrderid(String orderid) {
         return roomOrderMapper.selectByOrderid(orderid);
     }
 
     @Override
-    public List<RoomOrder> selectAllCompleteOrder() {
-        return roomOrderMapper.selectAllCompleteOrder();
+    public List<RoomOrder> selectAllCompleteOrder(Map map) {
+        return roomOrderMapper.selectAllCompleteOrder(map);
     }
 
     @Override
-    public List<RoomOrder> selectAllOrder() {
-        return roomOrderMapper.selectAllOrder();
+    public List<RoomOrder> selectAllOrder(Map map) {
+        return roomOrderMapper.selectAllOrder(map);
     }
 
     @Override
     public List<RoomOrder> selectAllPayOrder() {
         return roomOrderMapper.selectAllPayOrder();
+    }
+
+    @Override
+    public int selectCount() {
+        return roomOrderMapper.selectCount();
     }
 }

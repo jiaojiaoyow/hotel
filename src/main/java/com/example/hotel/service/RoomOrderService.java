@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RoomOrderService {
 
@@ -36,13 +37,16 @@ public interface RoomOrderService {
 
     List <RoomOrder> selectByUserid(String uid);
 
-    int selectByRDU(RoomOrder record);
+    String selectByRDU(RoomOrder record);
 
-    RoomOrder selectByOrderid(int orderid);
+    RoomOrder selectByOrderid(String orderid);
 
-    List<RoomOrder> selectAllCompleteOrder();
+    List<RoomOrder> selectAllCompleteOrder(Map map);
 
-    List<RoomOrder> selectAllOrder();
+    List<RoomOrder> selectAllOrder(Map map);
 
     List<RoomOrder> selectAllPayOrder();
+
+    int selectCount();
+
 }

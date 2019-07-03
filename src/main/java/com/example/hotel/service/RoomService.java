@@ -36,4 +36,7 @@ public interface RoomService {
     int updateByPrimaryKeyForNum(@Param("rname") String rname,@Param("roomnum") int roomnum);
 
     int updateByPrimaryKeyForReduce(@Param("rname") String rname,@Param("roomnum") int roomnum);
+
+    int selectCount();
+
 }

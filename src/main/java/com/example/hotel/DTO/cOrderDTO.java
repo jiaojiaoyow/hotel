@@ -3,7 +3,7 @@ package com.example.hotel.DTO;
 public class cOrderDTO {
 
     private String uid;  //用户id
-    private int orderid; //订单id
+    private String orderid; //订单id
     private int status; //状态 1
     private double balance;  //余额
 
@@ -19,7 +19,7 @@ public class cOrderDTO {
 
     public  cOrderDTO(){}
 
-    public cOrderDTO(String uid,int orderid,int status,double balance){
+    public cOrderDTO(String uid,String orderid,int status,double balance){
 
         this.orderid=orderid;
         this.uid=uid;
@@ -43,11 +43,11 @@ public class cOrderDTO {
         this.uid = uid;
     }
 
-    public int getOrderid() {
+    public String getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(int orderid) {
+    public void setOrderid(String orderid) {
         this.orderid = orderid;
     }
 

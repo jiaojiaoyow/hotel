@@ -84,11 +84,11 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="com.example.hotel.model.GetCouponKey" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from getcoupon
     where uid = #{uid,jdbcType=CHAR}
-      and cid = #{cid,jdbcType=INTEGER}
+    and cid = #{cid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.example.hotel.model.GetCouponKey">
     delete from getcoupon
@@ -176,10 +176,10 @@
   <update id="updateByExample" parameterType="map">
     update getcoupon
     set uid = #{record.uid,jdbcType=CHAR},
-      cid = #{record.cid,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=TINYINT},
-      use_start_date = #{record.useStartDate,jdbcType=VARCHAR},
-      use_end_date = #{record.useEndDate,jdbcType=VARCHAR}
+    cid = #{record.cid,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=TINYINT},
+    use_start_date = #{record.useStartDate,jdbcType=VARCHAR},
+    use_end_date = #{record.useEndDate,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,7 +198,7 @@
       </if>
     </set>
     where uid = #{uid,jdbcType=CHAR}
-      and cid = #{cid,jdbcType=INTEGER}
+    and cid = #{cid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.GetCoupon">
     update getcoupon

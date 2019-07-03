@@ -4,6 +4,8 @@ import com.example.hotel.model.RoomOrder;
 import com.example.hotel.model.RoomOrderExample;
 import com.example.hotel.model.RoomOrderKey;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -34,13 +36,15 @@ public interface RoomOrderMapper {
 
     List <RoomOrder> selectByUserid(String uid);
 
-    int selectByRDU(RoomOrder record);
+   String selectByRDU(RoomOrder record);
 
-    RoomOrder selectByOrderid(int orderid);
+    RoomOrder selectByOrderid(String  orderid);
 
-    List<RoomOrder> selectAllCompleteOrder();
+    List<RoomOrder> selectAllCompleteOrder(Map map);
 
-    List<RoomOrder> selectAllOrder();
+    List<RoomOrder> selectAllOrder(Map map);
 
     List<RoomOrder> selectAllPayOrder();
+
+    int selectCount();
 }
