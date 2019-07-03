@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.hotel.dao.AdminMapper">
-  <resultMap id="BaseResultMap" type="com.example.hotel.model.Admin">
-    <id column="admin_id" jdbcType="INTEGER" property="adminId" />
+<mapper namespace="com.example.hotel.dao.GoodsOrderMapper">
+  <resultMap id="BaseResultMap" type="com.example.hotel.model.GoodsOrder">
+    <id column="gorderid" jdbcType="INTEGER" property="gorderid" />
+    <result column="uid" jdbcType="CHAR" property="uid" />
+    <result column="gid" jdbcType="INTEGER" property="gid" />
     <result column="uname" jdbcType="VARCHAR" property="uname" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    admin_id, uname, password
+    gorderid, uid, gid, uname, address, phone
   </sql>
-  <select id="selectByExample" parameterType="com.example.hotel.model.AdminExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.hotel.model.GoodsOrderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from goodsorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,67 +87,96 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from admin
-    where admin_id = #{adminId,jdbcType=INTEGER}
+    from goodsorder
+    where gorderid = #{gorderid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from admin
-    where admin_id = #{adminId,jdbcType=INTEGER}
+    delete from goodsorder
+    where gorderid = #{gorderid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.hotel.model.AdminExample">
-    delete from admin
+  <delete id="deleteByExample" parameterType="com.example.hotel.model.GoodsOrderExample">
+    delete from goodsorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.hotel.model.Admin">
-    insert into admin (admin_id, uname, password
+  <insert id="insert" parameterType="com.example.hotel.model.GoodsOrder">
+    insert into goodsorder (gorderid, uid, gid, 
+      uname, address, phone
       )
-    values (#{adminId,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+    values (#{gorderid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{gid,jdbcType=INTEGER}, 
+      #{uname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.hotel.model.Admin">
-    insert into admin
+  <insert id="insertSelective" parameterType="com.example.hotel.model.GoodsOrder">
+    insert into goodsorder
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="adminId != null">
-        admin_id,
+      <if test="gorderid != null">
+        gorderid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="gid != null">
+        gid,
       </if>
       <if test="uname != null">
         uname,
       </if>
-      <if test="password != null">
-        password,
+      <if test="address != null">
+        address,
+      </if>
+      <if test="phone != null">
+        phone,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="adminId != null">
-        #{adminId,jdbcType=INTEGER},
+      <if test="gorderid != null">
+        #{gorderid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=CHAR},
+      </if>
+      <if test="gid != null">
+        #{gid,jdbcType=INTEGER},
       </if>
       <if test="uname != null">
         #{uname,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.hotel.model.AdminExample" resultType="java.lang.Long">
-    select count(*) from admin
+  <select id="countByExample" parameterType="com.example.hotel.model.GoodsOrderExample" resultType="java.lang.Long">
+    select count(*) from goodsorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update admin
+    update goodsorder
     <set>
-      <if test="record.adminId != null">
-        admin_id = #{record.adminId,jdbcType=INTEGER},
+      <if test="record.gorderid != null">
+        gorderid = #{record.gorderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=CHAR},
+      </if>
+      <if test="record.gid != null">
+        gid = #{record.gid,jdbcType=INTEGER},
       </if>
       <if test="record.uname != null">
         uname = #{record.uname,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -152,39 +184,54 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update admin
-    set admin_id = #{record.adminId,jdbcType=INTEGER},
+    update goodsorder
+    set gorderid = #{record.gorderid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=CHAR},
+      gid = #{record.gid,jdbcType=INTEGER},
       uname = #{record.uname,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR}
+      address = #{record.address,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.Admin">
-    update admin
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.hotel.model.GoodsOrder">
+    update goodsorder
     <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=CHAR},
+      </if>
+      <if test="gid != null">
+        gid = #{gid,jdbcType=INTEGER},
+      </if>
       <if test="uname != null">
         uname = #{uname,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
     </set>
-    where admin_id = #{adminId,jdbcType=INTEGER}
+    where gorderid = #{gorderid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.Admin">
-    update admin
-    set uname = #{uname,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR}
-    where admin_id = #{adminId,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.GoodsOrder">
+    update goodsorder
+    set uid = #{uid,jdbcType=CHAR},
+      gid = #{gid,jdbcType=INTEGER},
+      uname = #{uname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where gorderid = #{gorderid,jdbcType=INTEGER}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.AdminExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.GoodsOrderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from goodsorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -192,10 +239,16 @@
       order by ${orderByClause}
     </if>
   </select>
-  <!--自己添加的-->
-  <select id="selectByUname" resultType="com.example.hotel.model.Admin" parameterType="java.lang.String">
-    SELECT * from admin where uname=#{uname}
-  </select>
 
+  <select id="selectCount" resultType="java.lang.Integer">
+  select count(*) from goodsorder
+</select>
 
+  <select id="selectPage" resultType="com.example.hotel.model.GoodsOrder" parameterType="java.util.Map">
+  select * from goodsorder limit #{begin},#{num}
+</select>
+
+  <select id="selectByUidPage" resultType="com.example.hotel.model.GoodsOrder" >
+  select * from goodsorder where uid=#{uid} limit #{begin},#{num}
+</select>
 </mapper>

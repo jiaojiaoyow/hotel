@@ -14,7 +14,7 @@ public class ResultDTO2 {
     private Object data;
     private String message;
 
-    private TokenDTO token;
+    private String token;
 
     public Integer getStatus() {
         return status;
@@ -40,15 +40,15 @@ public class ResultDTO2 {
         this.message = message;
     }
 
-    public TokenDTO getToken() {
+    public String getToken() {
         return token;
     }
 
-    public void setToken(TokenDTO token) {
+    public void setToken(String token) {
         this.token = token;
     }
 
-    public static ResultDTO2 ok(Object data,TokenDTO token) {
+    public static ResultDTO2 ok(Object data, String token) {
         ResultDTO2 resultDTO = new ResultDTO2();
         resultDTO.setStatus(200);
         resultDTO.setData(data);

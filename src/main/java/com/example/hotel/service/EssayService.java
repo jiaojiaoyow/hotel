@@ -41,10 +41,11 @@ public interface EssayService {
 
     int updateByPrimaryKey(Essay record);
 
+
+    //    自己写的
+
     List<Essay> selectAll();
 
-
-//    自己写的
     int selectCount();
 
     List<Essay> selectPage(Map map);

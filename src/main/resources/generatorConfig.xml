@@ -41,11 +41,21 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+        <table tableName="goods" domainObjectName="Goods">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="goodsorder" domainObjectName="GoodsOrder">
 
 
 
 
+
+<<<<<<< HEAD
         <table tableName="roomorder" domainObjectName="RoomOrder">
+=======
+
+>>>>>>> master
             <property name="useActualColumnNames" value="false"/>
         </table>
 

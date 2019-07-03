@@ -53,6 +53,13 @@ public class ResultDTO {
         return resultDTO;
     }
 
+    public static ResultDTO unkonwFail(String message) {
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setStatus(202);
+        resultDTO.setMessage("请求失败，因为："+message);
+        return resultDTO;
+    }
+
     public static ResultDTO fail(String message) {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setStatus(204);
@@ -60,12 +67,23 @@ public class ResultDTO {
         return resultDTO;
     }
 
-    public static ResultDTO unkonwFail(String message) {
+
+
+    public static ResultDTO interFail(String message) {
         ResultDTO resultDTO = new ResultDTO();
-        resultDTO.setStatus(202);
-        resultDTO.setMessage("请求失败，因为："+message);
+        resultDTO.setStatus(205);
+        resultDTO.setMessage(message+"已存在");
         return resultDTO;
     }
+
+
+    public static ResultDTO nothing() {
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setStatus(206);
+        resultDTO.setMessage("没有接受到数据");
+        return resultDTO;
+    }
+
 
 
 }

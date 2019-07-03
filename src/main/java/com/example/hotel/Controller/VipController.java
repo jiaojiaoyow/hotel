@@ -8,6 +8,7 @@ import com.example.hotel.service.UserService;
 import com.example.hotel.service.VipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +22,12 @@ public class VipController {
     private VipService vipService;
 
     @RequestMapping("/api/getVip")
-    public ResultDTO getVip(VipDTO vipDTO){
+    public ResultDTO getVip(@RequestBody VipDTO vipDTO){
         ResultDTO resultDTO=new ResultDTO();
         try {
+            if(vipDTO.getPhone()==null){
+                return resultDTO.nothing();
+            }
             //新增Vip
             VipCard vipCard=new VipCard();
             vipCard.setGender(vipDTO.getGender());
@@ -39,6 +43,28 @@ public class VipController {
             user.setStatus(1);
             userService.saveOrUpdate(user);
             return resultDTO.ok(null);
+        }catch (Exception e){
+            return resultDTO.unkonwFail(e.toString());
+        }
+    }
+
+
+    @RequestMapping("/api/isVip")
+    public ResultDTO isVip(String uid){
+        ResultDTO resultDTO=new ResultDTO();
+        try {
+            if(uid==null){
+                return resultDTO.nothing();
+            }
+            User user =userService.selectByPrimaryKey(uid);
+            if(user.getUid()==null){
+                return resultDTO.fail();
+            }
+            if(user.getStatus()==1){
+                return resultDTO.ok("是Vip");
+
+            }
+            return resultDTO.ok("非Vip");
         }catch (Exception e){
             return resultDTO.unkonwFail(e.toString());
         }

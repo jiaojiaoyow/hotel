@@ -28,10 +28,6 @@ public class CouponServiceImpl implements CouponService {
         return 0;
     }
 
-    @Override
-    public int deleteByPrimaryKey(Integer cid) {
-        return 0;
-    }
 
     @Override
     public int insert(Coupon record) {
@@ -54,7 +50,7 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public int updateByExampleSelective(Coupon record, CouponExample example) {
-        return 0;
+        return this.couponMapper.updateByExampleSelective(record,example);
     }
 
     @Override
@@ -62,10 +58,6 @@ public class CouponServiceImpl implements CouponService {
         return 0;
     }
 
-    @Override
-    public int updateByPrimaryKeySelective(Coupon record) {
-        return 0;
-    }
 
     @Override
     public int updateByPrimaryKey(Coupon record) {
@@ -89,5 +81,17 @@ public class CouponServiceImpl implements CouponService {
     public Coupon selectByPrimaryKey(Integer cid) {
         return this.couponMapper.selectByPrimaryKey(cid);
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(Coupon record) {
+        return this.couponMapper.updateByPrimaryKeySelective(record);
+    }
+
+
+    @Override
+    public int deleteByPrimaryKey(Integer cid) {
+        return this.couponMapper.deleteByPrimaryKey(cid);
+    }
+
 
 }

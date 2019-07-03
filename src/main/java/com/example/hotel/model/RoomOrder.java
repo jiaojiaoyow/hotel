@@ -23,12 +23,14 @@ public class RoomOrder extends RoomOrderKey {
 
     private String arrivetime;
 
+    private String comment;
+
     public String getUname() {
         return uname;
     }
 
     public void setUname(String uname) {
-        this.uname = uname == null ? null : uname.trim();
+        this.uname = uname;
     }
 
     public String getUphone() {
@@ -36,7 +38,7 @@ public class RoomOrder extends RoomOrderKey {
     }
 
     public void setUphone(String uphone) {
-        this.uphone = uphone == null ? null : uphone.trim();
+        this.uphone = uphone;
     }
 
     public Integer getRoomnumber() {
@@ -100,6 +102,14 @@ public class RoomOrder extends RoomOrderKey {
     }
 
     public void setArrivetime(String arrivetime) {
-        this.arrivetime = arrivetime == null ? null : arrivetime.trim();
+        this.arrivetime = arrivetime;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

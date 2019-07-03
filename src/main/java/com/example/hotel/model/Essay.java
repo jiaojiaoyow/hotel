@@ -1,15 +1,13 @@
 package com.example.hotel.model;
 
-import java.util.Date;
-
 public class Essay {
     private Integer aid;
 
     private String uid;
 
-    private String tiile;
+    private String title;
 
-    private Date createTime;
+    private String createTime;
 
     private String imageurl;
 
@@ -31,20 +29,20 @@ public class Essay {
         this.uid = uid == null ? null : uid.trim();
     }
 
-    public String getTiile() {
-        return tiile;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTiile(String tiile) {
-        this.tiile = tiile == null ? null : tiile.trim();
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime == null ? null : createTime.trim();
     }
 
     public String getImageurl() {
