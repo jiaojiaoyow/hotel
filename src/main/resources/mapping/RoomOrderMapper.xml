@@ -16,6 +16,9 @@
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="arrivetime" jdbcType="VARCHAR" property="arrivetime" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.hotel.model.RoomOrder">
+    <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -78,42 +81,25 @@
     orderid, uid, roomname, uname, uphone, roomnumber, ordertime, leavetime, orderday, 
     totalprice, orderstatus, cid, arrivetime
   </sql>
-
-  <!-- 通过uid查询所有订单-->
-  <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <sql id="Blob_Column_List">
+    comment
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.hotel.model.RoomOrderExample" resultMap="ResultMapWithBLOBs">
     select
+    <if test="distinct">
+      distinct
+    </if>
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from roomorder
-    where uid = #{uid,jdbcType=VARCHAR}
-    and orderstatus = 2
-
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
   </select>
-
-  <!--通过订单id查询当前订单-->
-  <select id="selectByOrderid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from roomorder
-    where orderid = #{orderid,jdbcType=INTEGER}
-
-  </select>
-
-
-  <!--通过用户id，订单起始时间，房间名确认id-->
-  <select id="selectByRDU" parameterType="com.example.hotel.model.RoomOrder" resultType="java.lang.Integer">
-    select
-     orderid
-    from roomorder
-    where uid = #{uid,jdbcType=VARCHAR}
-    and ordertime = #{ordertime,jdbcType=TIMESTAMP}
-     and roomname = #{roomname,jdbcType=VARCHAR}
-
-
-  </select>
-
-
-
-
   <select id="selectByExample" parameterType="com.example.hotel.model.RoomOrderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -128,9 +114,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.example.hotel.model.RoomOrderKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.example.hotel.model.RoomOrderKey" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from roomorder
     where orderid = #{orderid,jdbcType=INTEGER}
       and uid = #{uid,jdbcType=CHAR}
@@ -153,12 +141,12 @@
       uname, uphone, roomnumber, 
       ordertime, leavetime, orderday, 
       totalprice, orderstatus, cid, 
-      arrivetime)
+      arrivetime, comment)
     values (#{orderid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{roomname,jdbcType=VARCHAR}, 
       #{uname,jdbcType=VARCHAR}, #{uphone,jdbcType=VARCHAR}, #{roomnumber,jdbcType=INTEGER}, 
       #{ordertime,jdbcType=TIMESTAMP}, #{leavetime,jdbcType=TIMESTAMP}, #{orderday,jdbcType=INTEGER}, 
       #{totalprice,jdbcType=DOUBLE}, #{orderstatus,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
-      #{arrivetime,jdbcType=VARCHAR})
+      #{arrivetime,jdbcType=VARCHAR}, #{comment,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.hotel.model.RoomOrder">
     insert into roomorder
@@ -202,6 +190,9 @@
       <if test="arrivetime != null">
         arrivetime,
       </if>
+      <if test="comment != null">
+        comment,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
@@ -242,6 +233,9 @@
       </if>
       <if test="arrivetime != null">
         #{arrivetime,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -293,7 +287,30 @@
       <if test="record.arrivetime != null">
         arrivetime = #{record.arrivetime,jdbcType=VARCHAR},
       </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update roomorder
+    set orderid = #{record.orderid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=CHAR},
+      roomname = #{record.roomname,jdbcType=VARCHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      uphone = #{record.uphone,jdbcType=VARCHAR},
+      roomnumber = #{record.roomnumber,jdbcType=INTEGER},
+      ordertime = #{record.ordertime,jdbcType=TIMESTAMP},
+      leavetime = #{record.leavetime,jdbcType=TIMESTAMP},
+      orderday = #{record.orderday,jdbcType=INTEGER},
+      totalprice = #{record.totalprice,jdbcType=DOUBLE},
+      orderstatus = #{record.orderstatus,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      arrivetime = #{record.arrivetime,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -350,7 +367,27 @@
       <if test="arrivetime != null">
         arrivetime = #{arrivetime,jdbcType=VARCHAR},
       </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where orderid = #{orderid,jdbcType=INTEGER}
+      and uid = #{uid,jdbcType=CHAR}
+      and roomname = #{roomname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.hotel.model.RoomOrder">
+    update roomorder
+    set uname = #{uname,jdbcType=VARCHAR},
+      uphone = #{uphone,jdbcType=VARCHAR},
+      roomnumber = #{roomnumber,jdbcType=INTEGER},
+      ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      leavetime = #{leavetime,jdbcType=TIMESTAMP},
+      orderday = #{orderday,jdbcType=INTEGER},
+      totalprice = #{totalprice,jdbcType=DOUBLE},
+      orderstatus = #{orderstatus,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      arrivetime = #{arrivetime,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=LONGVARCHAR}
     where orderid = #{orderid,jdbcType=INTEGER}
       and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
@@ -371,6 +408,22 @@
       and uid = #{uid,jdbcType=CHAR}
       and roomname = #{roomname,jdbcType=VARCHAR}
   </update>
+  <select id="selectByExampleWithBLOBsWithRowbounds" parameterType="com.example.hotel.model.RoomOrderExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from roomorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExampleWithRowbounds" parameterType="com.example.hotel.model.RoomOrderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -385,4 +438,45 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <!-- 通过uid查询所有订单-->
+  <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from roomorder
+    where uid = #{uid,jdbcType=VARCHAR}
+    and orderstatus = 2
+
+  </select>
+
+  <!--通过订单id查询当前订单-->
+  <select id="selectByOrderid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from roomorder
+    where orderid = #{orderid,jdbcType=INTEGER}
+
+  </select>
+
+
+  <!--通过用户id，订单起始时间，房间名确认id-->
+  <select id="selectByRDU" parameterType="com.example.hotel.model.RoomOrder" resultType="java.lang.Integer">
+    select
+     orderid
+    from roomorder
+    where uid = #{uid,jdbcType=VARCHAR}
+    and ordertime = #{ordertime,jdbcType=TIMESTAMP}
+     and roomname = #{roomname,jdbcType=VARCHAR}
+
+
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from roomorder
+  </select>
+
+  <select id="selectPage" resultType="com.example.hotel.model.RoomOrder" parameterType="java.util.Map">
+    select * from roomorder limit #{begin},#{num}
+  </select>
+
 </mapper>

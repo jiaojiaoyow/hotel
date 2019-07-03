@@ -4,6 +4,8 @@ import com.example.hotel.model.RoomOrder;
 import com.example.hotel.model.RoomOrderExample;
 import com.example.hotel.model.RoomOrderKey;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -18,6 +20,10 @@ public interface RoomOrderMapper {
 
     int insertSelective(RoomOrder record);
 
+    List<RoomOrder> selectByExampleWithBLOBsWithRowbounds(RoomOrderExample example, RowBounds rowBounds);
+
+    List<RoomOrder> selectByExampleWithBLOBs(RoomOrderExample example);
+
     List<RoomOrder> selectByExampleWithRowbounds(RoomOrderExample example, RowBounds rowBounds);
 
     List<RoomOrder> selectByExample(RoomOrderExample example);
@@ -26,15 +32,25 @@ public interface RoomOrderMapper {
 
     int updateByExampleSelective(@Param("record") RoomOrder record, @Param("example") RoomOrderExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") RoomOrder record, @Param("example") RoomOrderExample example);
+
     int updateByExample(@Param("record") RoomOrder record, @Param("example") RoomOrderExample example);
 
     int updateByPrimaryKeySelective(RoomOrder record);
 
+    int updateByPrimaryKeyWithBLOBs(RoomOrder record);
+
     int updateByPrimaryKey(RoomOrder record);
+
+    //自己添加的
 
     List <RoomOrder> selectByUserid(String uid);
 
     int selectByRDU(RoomOrder record);
 
     RoomOrder selectByOrderid(int orderid);
+
+    int selectCount();
+
+    List<RoomOrder> selectPage(Map map);
 }

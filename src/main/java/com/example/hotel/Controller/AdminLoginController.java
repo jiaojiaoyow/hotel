@@ -29,7 +29,7 @@ public class AdminLoginController {
                 return resultDTO.nothing();
             }
             Admin admin1=adminService.selectByUname(admin.getUname());
-            if(admin1.getPassword()!=admin.getPassword()){
+            if(!admin1.getPassword().equals(admin.getPassword())){
                 return resultDTO.fail("密码错误");
             }
             return resultDTO.ok(null);
@@ -43,12 +43,12 @@ public class AdminLoginController {
     public ResultDTO alter(@RequestBody AdminDTO admin){
         ResultDTO resultDTO=new ResultDTO();
         try {
-            Admin admin1=new Admin();
-            BeanUtils.copyProperties(admin1,admin);
             if(admin.getUname()==null){
                 return resultDTO.nothing();
             }
-            int flag=adminService.insertSelective(admin1);
+            Admin admin1=new Admin();
+            BeanUtils.copyProperties(admin,admin1);
+            int flag=adminService.saveOrUpdate(admin1);
             if(flag==0){
                 return resultDTO.fail("数据库插入或者更新失败");
             }

@@ -120,6 +120,8 @@ public class CouponController {
             }
             return resultDTO.ok(null);
 
+        }catch (org.springframework.dao.DuplicateKeyException e){
+            return resultDTO.interFail("优惠卷");
         }catch (Exception e){
             return resultDTO.unkonwFail(e.toString());
         }

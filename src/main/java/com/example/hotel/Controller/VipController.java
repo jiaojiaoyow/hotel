@@ -47,4 +47,26 @@ public class VipController {
             return resultDTO.unkonwFail(e.toString());
         }
     }
+
+
+    @RequestMapping("/api/isVip")
+    public ResultDTO isVip(String uid){
+        ResultDTO resultDTO=new ResultDTO();
+        try {
+            if(uid==null){
+                return resultDTO.nothing();
+            }
+            User user =userService.selectByPrimaryKey(uid);
+            if(user.getUid()==null){
+                return resultDTO.fail();
+            }
+            if(user.getStatus()==1){
+                return resultDTO.ok("是Vip");
+
+            }
+            return resultDTO.ok("非Vip");
+        }catch (Exception e){
+            return resultDTO.unkonwFail(e.toString());
+        }
+    }
 }

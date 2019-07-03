@@ -33,10 +33,7 @@ public class EssayServiceImpl implements EssayService {
         return 0;
     }
 
-    @Override
-    public int insertSelective(Essay record) {
-        return 0;
-    }
+
 
     @Override
     public List<Essay> selectByExampleWithBLOBsWithRowbounds(EssayExample example, RowBounds rowBounds) {
@@ -114,6 +111,11 @@ public class EssayServiceImpl implements EssayService {
     @Override
     public int deleteByPrimaryKey(Integer aid) {
         return this.esseyMapper.deleteByPrimaryKey(aid);
+    }
+
+    @Override
+    public int insertSelective(Essay record) {
+        return this.esseyMapper.insertSelective(record);
     }
 
 

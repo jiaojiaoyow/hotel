@@ -41,7 +41,11 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="essay" domainObjectName="Essay">
+        <table tableName="goods" domainObjectName="Goods">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="goodsorder" domainObjectName="GoodsOrder">
             <property name="useActualColumnNames" value="false"/>
         </table>
 

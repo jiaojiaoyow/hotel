@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.example.hotel.model.Essay">
     <id column="aid" jdbcType="INTEGER" property="aid" />
     <result column="uid" jdbcType="CHAR" property="uid" />
-    <result column="tiile" jdbcType="VARCHAR" property="tiile" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
   </resultMap>
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    aid, uid, tiile, create_time, imageurl
+    aid, uid, title, create_time, imageurl
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -124,10 +124,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.hotel.model.Essay">
-    insert into essay (aid, uid, tiile, 
+    insert into essay (aid, uid, title, 
       create_time, imageurl, content
       )
-    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{tiile,jdbcType=VARCHAR}, 
+    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{imageurl,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -140,8 +140,8 @@
       <if test="uid != null">
         uid,
       </if>
-      <if test="tiile != null">
-        tiile,
+      <if test="title != null">
+        title,
       </if>
       <if test="createTime != null">
         create_time,
@@ -160,8 +160,8 @@
       <if test="uid != null">
         #{uid,jdbcType=CHAR},
       </if>
-      <if test="tiile != null">
-        #{tiile,jdbcType=VARCHAR},
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=VARCHAR},
@@ -189,8 +189,8 @@
       <if test="record.uid != null">
         uid = #{record.uid,jdbcType=CHAR},
       </if>
-      <if test="record.tiile != null">
-        tiile = #{record.tiile,jdbcType=VARCHAR},
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=VARCHAR},
@@ -210,7 +210,7 @@
     update essay
     set aid = #{record.aid,jdbcType=INTEGER},
       uid = #{record.uid,jdbcType=CHAR},
-      tiile = #{record.tiile,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},
       imageurl = #{record.imageurl,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
@@ -222,7 +222,7 @@
     update essay
     set aid = #{record.aid,jdbcType=INTEGER},
       uid = #{record.uid,jdbcType=CHAR},
-      tiile = #{record.tiile,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},
       imageurl = #{record.imageurl,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -235,8 +235,8 @@
       <if test="uid != null">
         uid = #{uid,jdbcType=CHAR},
       </if>
-      <if test="tiile != null">
-        tiile = #{tiile,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=VARCHAR},
@@ -253,7 +253,7 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.hotel.model.Essay">
     update essay
     set uid = #{uid,jdbcType=CHAR},
-      tiile = #{tiile,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},
       imageurl = #{imageurl,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR}
@@ -262,7 +262,7 @@
   <update id="updateByPrimaryKey" parameterType="com.example.hotel.model.Essay">
     update essay
     set uid = #{uid,jdbcType=CHAR},
-      tiile = #{tiile,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},
       imageurl = #{imageurl,jdbcType=VARCHAR}
     where aid = #{aid,jdbcType=INTEGER}
@@ -300,14 +300,16 @@
 
   <!--自己添加的-->
   <select id="selectAll" resultType="com.example.hotel.model.Essay">
-    select * from essay
-  </select>
+  select * from essay
+</select>
 
   <select id="selectCount" resultType="java.lang.Integer">
-    select count(*) from essay
-  </select>
+  select count(*) from essay
+</select>
 
   <select id="selectPage" resultType="com.example.hotel.model.Essay" parameterType="java.util.Map">
-    select * from essay limit #{begin},#{num}
-  </select>
+  select * from essay limit #{begin},#{num}
+</select>
+
+
 </mapper>

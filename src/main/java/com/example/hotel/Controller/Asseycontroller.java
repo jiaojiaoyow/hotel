@@ -44,29 +44,29 @@ public class Asseycontroller {
         }
     }
 
-    //得到数据库中的文章
-    @RequestMapping("/api/getEssay")
-    public ResultDTO getessay(){
-        ResultDTO resultDTO=new ResultDTO();
-        try {
-
-            List<Essay> essay=essayService.selectAll();
-            if(essay==null){
-                return resultDTO.fail();
-            }
-            return resultDTO.ok(essay);
-
-        }catch (Exception e){
-            return resultDTO.unkonwFail(e.toString());
-        }
-    }
+//    //得到数据库中的文章
+//    @RequestMapping("/api/getEssay")
+//    public ResultDTO getessay(){
+//        ResultDTO resultDTO=new ResultDTO();
+//        try {
+//
+//            List<Essay> essay=essayService.selectAll();
+//            if(essay==null){
+//                return resultDTO.fail();
+//            }
+//            return resultDTO.ok(essay);
+//
+//        }catch (Exception e){
+//            return resultDTO.unkonwFail(e.toString());
+//        }
+//    }
 
     @RequestMapping("/api/back/putEssay")
     public ResultDTO putEssay(Essay essay){
         Date nowtime=new Date();
         ResultDTO resultDTO=new ResultDTO();
         try {
-            if(essay.getTiile()==null){
+            if(essay.getTitle()==null){
                 return resultDTO.nothing();
             }
             essay.setCreateTime(DateUtil.change_str(nowtime));
@@ -75,6 +75,8 @@ public class Asseycontroller {
                 return resultDTO.fail("数据库插入失败");
             }
             return resultDTO.ok(null);
+        }catch (org.springframework.dao.DuplicateKeyException e){
+            return resultDTO.interFail("文章已存在");
         }catch (Exception e){
             return resultDTO.unkonwFail(e.toString());
         }

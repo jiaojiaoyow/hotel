@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("RoomOrderService")
 public class RoomOrderServiceImpl implements RoomOrderService {
@@ -67,15 +68,14 @@ public class RoomOrderServiceImpl implements RoomOrderService {
         return 0;
     }
 
-    @Override
-    public int updateByPrimaryKeySelective(RoomOrder record) {
-        return 0;
-    }
+
 
     @Override
     public int updateByPrimaryKey(RoomOrder record) {
         return 0;
     }
+
+    //已更改
 
     @Override
     public  List <RoomOrder> selectByUserid(String uid) {
@@ -90,5 +90,20 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     @Override
     public RoomOrder selectByOrderid(int orderid) {
         return roomOrderMapper.selectByOrderid(orderid);
+    }
+
+    @Override
+    public int selectCount() {
+        return this.roomOrderMapper.selectCount();
+    }
+
+    @Override
+    public List<RoomOrder> selectPage(Map map) {
+        return this.roomOrderMapper.selectPage(map);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(RoomOrder record) {
+        return this.roomOrderMapper.updateByPrimaryKeySelective(record);
     }
 }
